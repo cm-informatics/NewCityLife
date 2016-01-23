@@ -1,0 +1,332 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AAACB8D81C46B4A2007F558D /* menu_button.png in Resources */ = {isa = PBXBuildFile; fileRef = AAACB8D71C46B4A2007F558D /* menu_button.png */; };
+		AAACB8DA1C46C6D7007F558D /* ReportsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAACB8D91C46C6D7007F558D /* ReportsTableViewController.swift */; };
+		AAB1F95F1C47E547004D0437 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB1F95E1C47E547004D0437 /* CommentViewController.swift */; };
+		AAB465151C46A6AB00AC150A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB465141C46A6AB00AC150A /* AppDelegate.swift */; };
+		AAB465171C46A6AB00AC150A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB465161C46A6AB00AC150A /* ViewController.swift */; };
+		AAB4651A1C46A6AB00AC150A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAB465181C46A6AB00AC150A /* Main.storyboard */; };
+		AAB4651C1C46A6AB00AC150A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAB4651B1C46A6AB00AC150A /* Assets.xcassets */; };
+		AAB4651F1C46A6AB00AC150A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAB4651D1C46A6AB00AC150A /* LaunchScreen.storyboard */; };
+		AAB465271C46A6E600AC150A /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB465261C46A6E600AC150A /* Report.swift */; };
+		AAB4652E1C46B30800AC150A /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = AAB4652D1C46B30800AC150A /* button.png */; };
+		AACE417B1C4B981C0078BE17 /* light-blue-wallpaper.png in Resources */ = {isa = PBXBuildFile; fileRef = AACE417A1C4B981C0078BE17 /* light-blue-wallpaper.png */; };
+		AACE417D1C4B9E250078BE17 /* white_town.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AACE417C1C4B9E250078BE17 /* white_town.jpg */; };
+		AAF232311C47A74F00558A11 /* IssueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF232301C47A74F00558A11 /* IssueTableViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AAACB8D71C46B4A2007F558D /* menu_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button.png; sourceTree = "<group>"; };
+		AAACB8D91C46C6D7007F558D /* ReportsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportsTableViewController.swift; sourceTree = "<group>"; };
+		AAB1F95E1C47E547004D0437 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		AAB465111C46A6AB00AC150A /* NewCityLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewCityLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAB465141C46A6AB00AC150A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AAB465161C46A6AB00AC150A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AAB465191C46A6AB00AC150A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AAB4651B1C46A6AB00AC150A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AAB4651E1C46A6AB00AC150A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AAB465201C46A6AB00AC150A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AAB465261C46A6E600AC150A /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		AAB4652D1C46B30800AC150A /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		AACE417A1C4B981C0078BE17 /* light-blue-wallpaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light-blue-wallpaper.png"; sourceTree = "<group>"; };
+		AACE417C1C4B9E250078BE17 /* white_town.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = white_town.jpg; sourceTree = "<group>"; };
+		AAF232301C47A74F00558A11 /* IssueTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueTableViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AAB4650E1C46A6AB00AC150A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AAB465081C46A6AB00AC150A = {
+			isa = PBXGroup;
+			children = (
+				AAB465281C46AEE500AC150A /* Images */,
+				AAB465131C46A6AB00AC150A /* NewCityLife */,
+				AAB465121C46A6AB00AC150A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AAB465121C46A6AB00AC150A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AAB465111C46A6AB00AC150A /* NewCityLife.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AAB465131C46A6AB00AC150A /* NewCityLife */ = {
+			isa = PBXGroup;
+			children = (
+				AAB465141C46A6AB00AC150A /* AppDelegate.swift */,
+				AAB465161C46A6AB00AC150A /* ViewController.swift */,
+				AAACB8D91C46C6D7007F558D /* ReportsTableViewController.swift */,
+				AAB465261C46A6E600AC150A /* Report.swift */,
+				AAF232301C47A74F00558A11 /* IssueTableViewController.swift */,
+				AAB1F95E1C47E547004D0437 /* CommentViewController.swift */,
+				AAB465181C46A6AB00AC150A /* Main.storyboard */,
+				AAB4651B1C46A6AB00AC150A /* Assets.xcassets */,
+				AAB4651D1C46A6AB00AC150A /* LaunchScreen.storyboard */,
+				AAB465201C46A6AB00AC150A /* Info.plist */,
+			);
+			path = NewCityLife;
+			sourceTree = "<group>";
+		};
+		AAB465281C46AEE500AC150A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				AACE417C1C4B9E250078BE17 /* white_town.jpg */,
+				AACE417A1C4B981C0078BE17 /* light-blue-wallpaper.png */,
+				AAACB8D71C46B4A2007F558D /* menu_button.png */,
+				AAB4652D1C46B30800AC150A /* button.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AAB465101C46A6AB00AC150A /* NewCityLife */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAB465231C46A6AB00AC150A /* Build configuration list for PBXNativeTarget "NewCityLife" */;
+			buildPhases = (
+				AAB4650D1C46A6AB00AC150A /* Sources */,
+				AAB4650E1C46A6AB00AC150A /* Frameworks */,
+				AAB4650F1C46A6AB00AC150A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NewCityLife;
+			productName = NewCityLife;
+			productReference = AAB465111C46A6AB00AC150A /* NewCityLife.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AAB465091C46A6AB00AC150A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Christian Mansch";
+				TargetAttributes = {
+					AAB465101C46A6AB00AC150A = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = AAB4650C1C46A6AB00AC150A /* Build configuration list for PBXProject "NewCityLife" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AAB465081C46A6AB00AC150A;
+			productRefGroup = AAB465121C46A6AB00AC150A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AAB465101C46A6AB00AC150A /* NewCityLife */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AAB4650F1C46A6AB00AC150A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAB4651F1C46A6AB00AC150A /* LaunchScreen.storyboard in Resources */,
+				AACE417B1C4B981C0078BE17 /* light-blue-wallpaper.png in Resources */,
+				AAB4652E1C46B30800AC150A /* button.png in Resources */,
+				AACE417D1C4B9E250078BE17 /* white_town.jpg in Resources */,
+				AAACB8D81C46B4A2007F558D /* menu_button.png in Resources */,
+				AAB4651C1C46A6AB00AC150A /* Assets.xcassets in Resources */,
+				AAB4651A1C46A6AB00AC150A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AAB4650D1C46A6AB00AC150A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAF232311C47A74F00558A11 /* IssueTableViewController.swift in Sources */,
+				AAB465171C46A6AB00AC150A /* ViewController.swift in Sources */,
+				AAB1F95F1C47E547004D0437 /* CommentViewController.swift in Sources */,
+				AAB465151C46A6AB00AC150A /* AppDelegate.swift in Sources */,
+				AAACB8DA1C46C6D7007F558D /* ReportsTableViewController.swift in Sources */,
+				AAB465271C46A6E600AC150A /* Report.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AAB465181C46A6AB00AC150A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAB465191C46A6AB00AC150A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AAB4651D1C46A6AB00AC150A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAB4651E1C46A6AB00AC150A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AAB465211C46A6AB00AC150A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AAB465221C46A6AB00AC150A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AAB465241C46A6AB00AC150A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NewCityLife/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Christian-Mansch.NewCityLife";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AAB465251C46A6AB00AC150A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NewCityLife/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Christian-Mansch.NewCityLife";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AAB4650C1C46A6AB00AC150A /* Build configuration list for PBXProject "NewCityLife" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAB465211C46A6AB00AC150A /* Debug */,
+				AAB465221C46A6AB00AC150A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AAB465231C46A6AB00AC150A /* Build configuration list for PBXNativeTarget "NewCityLife" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAB465241C46A6AB00AC150A /* Debug */,
+				AAB465251C46A6AB00AC150A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AAB465091C46A6AB00AC150A /* Project object */;
+}
