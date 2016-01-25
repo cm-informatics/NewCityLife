@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class ReportsTableViewController: UITableViewController, CLLocationManagerDelegate
+class ReportsTableViewController: UITableViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
 
     //var reportDictionary = [NSObject:NSObject]()
@@ -59,13 +59,6 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
        
     }
     
-    override func viewDidAppear(animated: Bool)
-    {
-        
-    }
-
-    
-    
     // MARK: - Unwind Segues
     
     @IBAction func backNavigation(sender: UIStoryboardSegue)
@@ -82,8 +75,6 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
             print(cell?.textLabel?.text)
         
             reportDictionary["category"] = cell?.textLabel?.text!
-            //category = (cell?.textLabel?.text!)!
-            //self.tableView.reloadRowsAtIndexPaths(<#T##indexPaths: [NSIndexPath]##[NSIndexPath]#>, withRowAnimation: <#T##UITableViewRowAnimation#>)
         }
         
         if sender.identifier! == "commentUnwind"
@@ -117,7 +108,11 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
             let imageCell = tableView.dequeueReusableCellWithIdentifier("imageCell", forIndexPath: indexPath) as! ImageTableViewCell
 
             imageCell.imageCellLabel.text = "Bild"
-            imageCell.detailTextLabel?.text = "wählen"
+            //imageCell.detailTextLabel?.text = "wählen"
+            if let image = reportDictionary["image"]
+            {
+                imageCell.imageCellImageView.image = image as? UIImage
+            }
             
             return imageCell
         }
@@ -202,12 +197,7 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         report.locationData.breitengrad = newLocation.coordinate.latitude
         report.locationData.längengrad = newLocation.coordinate.longitude
         
-        //let ip = NSIndexPath(forRow: 2, inSection: 0)
-        
-        //self.tableView.reloadRowsAtIndexPaths([ip], withRowAnimation: .Automatic)
-        
         reportDictionary["location"] = "\(newLocation.coordinate.longitude), \(newLocation.coordinate.latitude)"
-        
     }
 
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
@@ -227,6 +217,37 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == 0
+        {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            
+            if UIImagePickerController.isSourceTypeAvailable(.Camera)
+            {
+                imagePicker.sourceType = .Camera
+            }
+            else
+            {
+                print("No Media available")
+            }
+            
+            presentViewController(imagePicker, animated: true, completion: nil)
+        }
+    }
 
+    // MARK: - UIImagePickerDelegates
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        reportDictionary["image"] = selectedImage
+        
+        dismissViewControllerAnimated(true, completion: nil)
+        
+        
+    }
+    
 }
 
