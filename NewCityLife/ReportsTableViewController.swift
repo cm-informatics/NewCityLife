@@ -7,54 +7,66 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ReportsTableViewController: UITableViewController {
+class ReportsTableViewController: UITableViewController, CLLocationManagerDelegate
+{
+
+    //var reportDictionary = [NSObject:NSObject]()
+    
+    var reportDictionary = [NSObject:NSObject]()
+        {
+        didSet
+            {
+                print("Has been set to \(reportDictionary)")
+                self.tableView.reloadData()
+            }
+        }
 
     let report = Report(image: UIImage(), category: "", locationData: (0,0), comment: "", timestamp: NSDate())
     
     
-    var reportDictionary = [NSObject:NSObject]()
+    let locationManager = CLLocationManager()
     
-    var category: String = ""
-        {
-            didSet
-            {
-                //report.category = category
-                print("Category was set to: \(report.category)")
-                
-                // Eine Idee wäre hier jetzt die categorie an den Textlabel der Zelle zu
-                // übergeben. Das macht man mit allen werten und erst ganz zum Schluss
-                // wird das Report-Objekt erzeugt
-                
-                /*reportDictionary["category"] = category
-                print(reportDictionary)
-*/
-            }
-        
-        }
     
-    /*var comment: String = ""
-        {
-            didSet
-            {
-                report.comment = comment
-                print("Comment was set to: \(report.comment)")
-                
-            }
-        
-    }
-*/
+    // MARK: - AppLifeCycle
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
-         self.clearsSelectionOnViewWillAppear = false
+        // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        let current_date = NSDate()
         
-       //report.comment
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyy HH:mm:ss"
+        print(dateFormatter.stringFromDate(current_date))
+        
+        locationManager.delegate = self
+        
+        if CLLocationManager.locationServicesEnabled()
+        {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            locationManager.startUpdatingLocation()
+            
+        }
+        else
+        {
+            print("Location Service not enabled")
+        }
+       
     }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        
+    }
+
+    
+    
+    // MARK: - Unwind Segues
     
     @IBAction func backNavigation(sender: UIStoryboardSegue)
     {
@@ -70,8 +82,8 @@ class ReportsTableViewController: UITableViewController {
             print(cell?.textLabel?.text)
         
             reportDictionary["category"] = cell?.textLabel?.text!
-        
-            //var uws = UIStoryboardUnwindSegueSource()
+            //category = (cell?.textLabel?.text!)!
+            //self.tableView.reloadRowsAtIndexPaths(<#T##indexPaths: [NSIndexPath]##[NSIndexPath]#>, withRowAnimation: <#T##UITableViewRowAnimation#>)
         }
         
         if sender.identifier! == "commentUnwind"
@@ -84,19 +96,6 @@ class ReportsTableViewController: UITableViewController {
 
     }
     
-
-    override func viewWillAppear(animated: Bool)
-    {
-        if reportDictionary.count > 0
-        {
-            tableView.reloadData()
-            print("Im Dict ist etwas drin")
-        }
-        
-        //print("IndexPathForSelectedRow: \(self.tableView.indexPathForSelectedRow)")
-        
-        
-    }
     
     // MARK: - Table view data source
 
@@ -107,7 +106,7 @@ class ReportsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 5
+        return 4
     }
     
     
@@ -115,9 +114,9 @@ class ReportsTableViewController: UITableViewController {
     {
         if indexPath.row == 0
         {
-            let imageCell = tableView.dequeueReusableCellWithIdentifier("imageCell", forIndexPath: indexPath)
+            let imageCell = tableView.dequeueReusableCellWithIdentifier("imageCell", forIndexPath: indexPath) as! ImageTableViewCell
 
-            imageCell.textLabel?.text = "Bild"
+            imageCell.imageCellLabel.text = "Bild"
             imageCell.detailTextLabel?.text = "wählen"
             
             return imageCell
@@ -127,6 +126,7 @@ class ReportsTableViewController: UITableViewController {
             let categoryCell = tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath)
             
             categoryCell.textLabel?.text = "Kategorie"
+            categoryCell.accessoryType = .DisclosureIndicator
             
             if let category = reportDictionary["category"]
             {
@@ -144,24 +144,28 @@ class ReportsTableViewController: UITableViewController {
             let locationCell = tableView.dequeueReusableCellWithIdentifier("locationCell", forIndexPath: indexPath)
             
             locationCell.textLabel?.text = "Location"
-            locationCell.detailTextLabel?.text = "wählen"
-            
+            if let location = reportDictionary["location"]
+            {
+                
+                locationCell.detailTextLabel?.textColor = UIColor.grayColor()
+                locationCell.detailTextLabel?.text = location as? String
+            }
+            else
+            {
+                locationCell.detailTextLabel?.textColor = UIColor.redColor()
+                locationCell.detailTextLabel?.text = "Ortsbestimmung nicht möglich"
+
+
+            }
+                        
             return locationCell
-        }
-        else if indexPath.row == 3
-        {
-            let dateCell = tableView.dequeueReusableCellWithIdentifier("dateCell", forIndexPath: indexPath)
-            
-            dateCell.textLabel?.text = "Datum"
-            dateCell.detailTextLabel?.text = "wählen"
-            
-            return dateCell
         }
         else
         {
             let commentCell = tableView.dequeueReusableCellWithIdentifier("descriptionCell", forIndexPath: indexPath)
             
             commentCell.textLabel?.text = "Beschreibung"
+            commentCell.accessoryType = .DisclosureIndicator
             
             if let comment = reportDictionary["comment"]
             {
@@ -185,7 +189,34 @@ class ReportsTableViewController: UITableViewController {
         return tableView.rowHeight
     }
     
+    
+    // MARK: - CLLocationManager Delegate
+    
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        print("Latitude: \(newLocation.coordinate.latitude)")
+        print("Longitude: \(newLocation.coordinate.longitude)")
+        
+        
+        manager.stopUpdatingLocation()
 
+        report.locationData.breitengrad = newLocation.coordinate.latitude
+        report.locationData.längengrad = newLocation.coordinate.longitude
+        
+        //let ip = NSIndexPath(forRow: 2, inSection: 0)
+        
+        //self.tableView.reloadRowsAtIndexPaths([ip], withRowAnimation: .Automatic)
+        
+        reportDictionary["location"] = "\(newLocation.coordinate.longitude), \(newLocation.coordinate.latitude)"
+        
+    }
+
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        manager.stopUpdatingLocation()
+        print("\(error)")
+        
+        //reportDictionary["location"] = "Ortsbestimmung nicht möglich"
+    }
+    
     
     /*
     // MARK: - Navigation
