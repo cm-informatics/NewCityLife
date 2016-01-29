@@ -11,20 +11,17 @@ import CoreLocation
 
 class ReportsTableViewController: UITableViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
-
-    //var reportDictionary = [NSObject:NSObject]()
     
     var reportDictionary = [NSObject:NSObject]()
         {
         didSet
             {
-                print("Has been set to \(reportDictionary)")
+                //print("Has been set to \(reportDictionary)")
                 self.tableView.reloadData()
             }
         }
 
     let report = Report(image: UIImage(), category: "", locationData: (0,0), comment: "", timestamp: NSDate())
-    
     
     let locationManager = CLLocationManager()
     
@@ -36,12 +33,18 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
+        let sendButton = UIBarButtonItem(title: "Send", style: .Plain, target: self, action: "sendAction:")
+        self.navigationItem.rightBarButtonItem = sendButton
+        
         let current_date = NSDate()
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyy HH:mm:ss"
-        print(dateFormatter.stringFromDate(current_date))
+        
+        reportDictionary["date"] = dateFormatter.stringFromDate(current_date)
+        
+        report.timestamp = dateFormatter.dateFromString(reportDictionary["date"] as! String)!
         
         locationManager.delegate = self
         
@@ -63,7 +66,7 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
     
     @IBAction func backNavigation(sender: UIStoryboardSegue)
     {
-        print("Der Identifier ist: \(sender.identifier!)")
+        //print("Der Identifier ist: \(sender.identifier!)")
         
         if sender.identifier! == "categoryUnwind"
         {
@@ -245,9 +248,94 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         reportDictionary["image"] = selectedImage
         
         dismissViewControllerAnimated(true, completion: nil)
-        
-        
     }
     
-}
+    // MARK: - UIBarButton Actions
+    
+    func sendAction(sender: AnyObject)
+    {
+        print(reportDictionary.count)
+        
+        if reportDictionary.count == 5  // Wenn genau vier Werte vorliegen
+        {
+            print("Alles drin: \(reportDictionary.values)")
+            
+            //reportDictionary.keys.enumerate()
+            
+            for (_, c) in reportDictionary.keys.enumerate()
+            {
+                switch c
+                {
+                    case "image"    : report.image = reportDictionary["image"] as! UIImage
+                    case "category" : report.category = reportDictionary["category"] as! String
+                    case "comment"  : report.comment = reportDictionary["comment"] as! String
+                    
+                    default: "An error occoured"
+                }
+            }
+            
+            
+            print("Der report: \(report.category)\n\(report.image)\n\(report.comment)")
+            
+            let fileManager = NSFileManager()
+            
+            var pListPath: NSURL
+            
+            let rootPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
+            
+            if let documentDir = rootPath
+            {
+                let reportsPath = NSURL(fileURLWithPath: documentDir, isDirectory: true).URLByAppendingPathComponent("Reports")
+                
+                //print("Directory: \(reportsPath)")
+                
+                if fileManager.fileExistsAtPath(reportsPath.path!)
+                {
+                    print("Verzeichnis existiert bereits")
+                }
+                else
+                {
+                    do
+                    {
+                        try fileManager.createDirectoryAtURL(reportsPath, withIntermediateDirectories: false, attributes: nil)
+                        print("Verzeichniss wurde erfolgreich erstellt - Dir Path: \(reportsPath)")
+                    }
+                    catch
+                    {
+                        print("Fehler bei der Verzeichniss-Erstellung")
+                        print("Der Fehler ist \(error)")
+                    }
+                  
+                }
+                
+                // Das Verzeichniss existiert jetzt, also wird jetzt die myReports.plist -Datei angelegt.
+                
+                pListPath = NSURL(fileURLWithPath: String(reportsPath)).URLByAppendingPathComponent("myReports.plist", isDirectory: false)
+                
+                
+                let data: NSData = NSData()
+                var isDir: ObjCBool = false
+                
+                if fileManager.fileExistsAtPath(pListPath.path!, isDirectory: &isDir)
+                    {
+                        print("Datei existiert bereits")
+                    }
+                    else
+                    {
+                        
+                        let success = fileManager.createFileAtPath(pListPath.path!, contents: data, attributes: nil)
+                        
+                        print("Was file created?: \(success)")
+                        print("plistPath: \(pListPath)")
+                    }
 
+                
+                
+            }
+        }
+        else
+        {
+            print("Da fehlt noch was: \(reportDictionary.enumerate())")
+        }
+    }
+}
