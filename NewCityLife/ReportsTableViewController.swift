@@ -275,13 +275,17 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
             }
             
             
+            
             print("Der report: \(report.category)\n\(report.image)\n\(report.comment)")
+            
+            
             
             let fileManager = NSFileManager()
             
             var pListPath: NSURL
             
             let rootPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
+            //let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
             
             if let documentDir = rootPath
             {
@@ -310,26 +314,55 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
                 
                 // Das Verzeichniss existiert jetzt, also wird jetzt die myReports.plist -Datei angelegt.
                 
-                pListPath = NSURL(fileURLWithPath: String(reportsPath)).URLByAppendingPathComponent("myReports.plist", isDirectory: false)
+                //pListPath = NSURL(fileURLWithPath: String(reportsPath)).URLByAppendingPathComponent("myReports.plist", isDirectory: false)
+                pListPath = NSURL(fileURLWithPath: reportsPath.path!).URLByAppendingPathComponent("myReports.plist", isDirectory: false)
                 
-                
-                let data: NSData = NSData()
                 var isDir: ObjCBool = false
                 
                 if fileManager.fileExistsAtPath(pListPath.path!, isDirectory: &isDir)
                     {
-                        print("Datei existiert bereits")
+                        print("File already exits")
                     }
                     else
                     {
-                        
-                        let success = fileManager.createFileAtPath(pListPath.path!, contents: data, attributes: nil)
+                        //let success = fileManager.createFileAtPath(pListPath.path!, contents: data, attributes: nil)
+                        let dictionary = NSDictionary()
+                        let success = dictionary.writeToURL(pListPath, atomically: true)
                         
                         print("Was file created?: \(success)")
-                        print("plistPath: \(pListPath)")
+                        //print("plistPath: \(pListPath.path!)")
                     }
-
                 
+                //TODO: Create a more powerful UID
+                let UID = Int(arc4random_uniform(10000))
+                
+                //var completeReport = NSMutableDictionary()
+                
+                //print("PList Path: \(pListPath.path!)")
+                
+                if var completeReport = NSMutableDictionary(contentsOfURL: pListPath)
+                {
+                    completeReport = NSMutableDictionary(dictionary: NSMutableDictionary(contentsOfURL: pListPath)!)
+                    
+                    //reportDictionary["image"] = "The image"
+                    completeReport.setObject(reportDictionary, forKey: "Report Nr. \(UID)")
+                    
+                    print("CompleteReport: \(completeReport)")
+                    
+                    if completeReport.writeToURL(pListPath, atomically: true)
+                    {
+                        print("Writing was successful")
+                    }
+                    else
+                    {
+                        print("Writing failed")
+                    }
+                    
+                }
+                else
+                {
+                    print("An error occoured")
+                }
                 
             }
         }

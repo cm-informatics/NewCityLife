@@ -14,7 +14,7 @@ class CommentViewController: UIViewController, UITextViewDelegate {
     
     override func viewWillAppear(animated: Bool)
     {
-        //commentTextView.becomeFirstResponder()
+        commentTextView.becomeFirstResponder()
     }
     
     override func viewDidLoad() {
