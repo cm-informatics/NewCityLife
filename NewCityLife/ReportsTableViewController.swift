@@ -115,6 +115,21 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
             if let image = reportDictionary["image"]
             {
                 imageCell.imageCellImageView.image = image as? UIImage
+                
+                /*let imageData: NSData = UIImageJPEGRepresentation(image as! UIImage, 0.2)!
+                print(imageData)
+                reportDictionary["image"] = imageData
+                */
+                
+               /* if let imageData = image as? UIImage
+                {
+                    let imageData = NSData(data: UIImageJPEGRepresentation(imageData, 0.2)!)
+                    print(imageData)
+                    reportDictionary["image"] = imageData
+                }
+                */
+                
+                
             }
             
             return imageCell
@@ -260,7 +275,6 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         {
             print("Alles drin: \(reportDictionary.values)")
             
-            //reportDictionary.keys.enumerate()
             
             for (_, c) in reportDictionary.keys.enumerate()
             {
@@ -274,7 +288,8 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
                 }
             }
             
-            
+            let imageData = NSData(data: UIImageJPEGRepresentation(report.image, 0.2)!)
+            reportDictionary["image"] = imageData
             
             print("Der report: \(report.category)\n\(report.image)\n\(report.comment)")
             
@@ -291,7 +306,6 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
             {
                 let reportsPath = NSURL(fileURLWithPath: documentDir, isDirectory: true).URLByAppendingPathComponent("Reports")
                 
-                //print("Directory: \(reportsPath)")
                 
                 if fileManager.fileExistsAtPath(reportsPath.path!)
                 {
@@ -330,28 +344,28 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
                         let success = dictionary.writeToURL(pListPath, atomically: true)
                         
                         print("Was file created?: \(success)")
-                        //print("plistPath: \(pListPath.path!)")
                     }
                 
                 //TODO: Create a more powerful UID
                 let UID = Int(arc4random_uniform(10000))
                 
-                //var completeReport = NSMutableDictionary()
-                
-                //print("PList Path: \(pListPath.path!)")
-                
                 if var completeReport = NSMutableDictionary(contentsOfURL: pListPath)
                 {
                     completeReport = NSMutableDictionary(dictionary: NSMutableDictionary(contentsOfURL: pListPath)!)
                     
-                    //reportDictionary["image"] = "The image"
+             
                     completeReport.setObject(reportDictionary, forKey: "Report Nr. \(UID)")
                     
-                    print("CompleteReport: \(completeReport)")
+                    //print("CompleteReport: \(completeReport)")
                     
                     if completeReport.writeToURL(pListPath, atomically: true)
                     {
                         print("Writing was successful")
+                        
+                        let successAlert = UIAlertController(title: "Report Nr. \(UID)", message: "Daten erfolgreich gespeichert", preferredStyle: .Alert)
+                        successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                        
+                        self.presentViewController(successAlert, animated: true, completion: nil)
                     }
                     else
                     {
