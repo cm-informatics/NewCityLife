@@ -363,7 +363,11 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
                         print("Writing was successful")
                         
                         let successAlert = UIAlertController(title: "Report Nr. \(UID)", message: "Daten erfolgreich gespeichert", preferredStyle: .Alert)
-                        successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                        
+                        successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler:{(action: UIAlertAction!) -> Void in
+                            print("OK was pressed")
+                            self.navigationController?.popToRootViewControllerAnimated(true)
+                        }))
                         
                         self.presentViewController(successAlert, animated: true, completion: nil)
                     }
