@@ -10,6 +10,9 @@ import UIKit
 
 class MyReportsTableViewController: UITableViewController {
 
+    var sortedReportKeys: NSArray = []
+    var listOfAllReports: NSDictionary = [:]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +25,39 @@ class MyReportsTableViewController: UITableViewController {
         self.navigationItem.title = "My Reports"
         self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
         
+        let fileManager = NSFileManager()
+        
+        let documentPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
+        
+        let reportsPath = NSURL(fileURLWithPath: documentPath!, isDirectory: true).URLByAppendingPathComponent("Reports")
+        
+        let pListPath = reportsPath.URLByAppendingPathComponent("myReports.plist", isDirectory: false)
+        
+        var isDir: ObjCBool = false
+        
+        //Es wird direkt überprüft ob die plist-Datei an einem bestimmten Pfad existiert. Ist dies der Fall,
+        //existiert auch der Pfad automatisch. Existiert die Datei nicht, gibt es auch den Pad nicht.
+        if fileManager.fileExistsAtPath(pListPath.path!, isDirectory: &isDir)
+        {
+            print("Datei existiert bereits")
+            
+            listOfAllReports = NSMutableDictionary(contentsOfURL: pListPath)!
+            let allKeysOfTheReports = NSArray(array: listOfAllReports.allKeys)
+            
+            //print(allKeysOfTheReports)
+            
+            
+            //let sortedReportKeys = allKeysOfTheReports.sortedArrayUsingDescriptors(NSSortDescriptor(key: nil, ascending: false, selector: "compare:"))
+            
+            sortedReportKeys = allKeysOfTheReports.sortedArrayUsingDescriptors([NSSortDescriptor(key: nil, ascending: false, selector: "compare:")])
+            
+            print(sortedReportKeys)
+        }
+        else
+        {
+            print("Datei nicht vorhanden")
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,24 +68,36 @@ class MyReportsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return sortedReportKeys.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("myReportsTableViewCell", forIndexPath: indexPath) as! MyReportsTableViewCell
 
         // Configure the cell...
-
+        let aSingleReport = listOfAllReports.objectForKey(sortedReportKeys.objectAtIndex(indexPath.row)) as! NSDictionary
+        
+        //cell.categoryLabel.text = aSingleReport.objectForKey("
+        cell.categoryLabel.text = aSingleReport.objectForKey("category") as? String
+        cell.dateLabel.text = aSingleReport.objectForKey("date") as? String
+        cell.locationLabel.text = aSingleReport.objectForKey("location") as? String
+        cell.issueImageView.image = UIImage(data: aSingleReport.objectForKey("image") as! NSData)
         return cell
     }
-    */
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 90
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
+        return "\(listOfAllReports.count) Report(s)"
+    }
 
     /*
     // Override to support conditional editing of the table view.

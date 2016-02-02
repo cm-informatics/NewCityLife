@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AA0F2B2B1C5FA44D006B9DBD /* MyReportsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F2B2A1C5FA44D006B9DBD /* MyReportsTableViewController.swift */; };
+		AA0F2B2D1C60D4C9006B9DBD /* MyReportsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F2B2C1C60D4C9006B9DBD /* MyReportsTableViewCell.swift */; };
 		AA2C68661C56339100ACF1BF /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C68651C56339100ACF1BF /* ImageTableViewCell.swift */; };
 		AA2C68681C5635FB00ACF1BF /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2C68671C5635FB00ACF1BF /* defaultPhoto.png */; };
 		AAACB8D81C46B4A2007F558D /* menu_button.png in Resources */ = {isa = PBXBuildFile; fileRef = AAACB8D71C46B4A2007F558D /* menu_button.png */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		AA0F2B2A1C5FA44D006B9DBD /* MyReportsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReportsTableViewController.swift; sourceTree = "<group>"; };
+		AA0F2B2C1C60D4C9006B9DBD /* MyReportsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReportsTableViewCell.swift; sourceTree = "<group>"; };
 		AA2C68651C56339100ACF1BF /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		AA2C68671C5635FB00ACF1BF /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
 		AAACB8D71C46B4A2007F558D /* menu_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button.png; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				AA2C68651C56339100ACF1BF /* ImageTableViewCell.swift */,
+				AA0F2B2C1C60D4C9006B9DBD /* MyReportsTableViewCell.swift */,
 			);
 			name = CustomCells;
 			path = NewCityLife;
@@ -185,6 +188,7 @@
 			files = (
 				AA2C68661C56339100ACF1BF /* ImageTableViewCell.swift in Sources */,
 				AAF232311C47A74F00558A11 /* IssueTableViewController.swift in Sources */,
+				AA0F2B2D1C60D4C9006B9DBD /* MyReportsTableViewCell.swift in Sources */,
 				AAB465171C46A6AB00AC150A /* ViewController.swift in Sources */,
 				AAB1F95F1C47E547004D0437 /* CommentViewController.swift in Sources */,
 				AAB465151C46A6AB00AC150A /* AppDelegate.swift in Sources */,

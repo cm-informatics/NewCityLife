@@ -328,8 +328,7 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
                 
                 // Das Verzeichniss existiert jetzt, also wird jetzt die myReports.plist -Datei angelegt.
                 
-                //pListPath = NSURL(fileURLWithPath: String(reportsPath)).URLByAppendingPathComponent("myReports.plist", isDirectory: false)
-                pListPath = NSURL(fileURLWithPath: reportsPath.path!).URLByAppendingPathComponent("myReports.plist", isDirectory: false)
+                pListPath = reportsPath.URLByAppendingPathComponent("myReports.plist", isDirectory: false)
                 
                 var isDir: ObjCBool = false
                 
@@ -346,8 +345,13 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
                         print("Was file created?: \(success)")
                     }
                 
-                //TODO: Create a more powerful UID
-                let UID = Int(arc4random_uniform(10000))
+                //Generierung einer ID aus Datum und einer zufälligen Zahl bis maximal 9999 (10000-1)
+                let current_date = NSDate()
+                let dateFormatter = NSDateFormatter()
+                
+                dateFormatter.dateFormat = "ddMMyyyyHHmmss"
+                
+                let UID = dateFormatter.stringFromDate(current_date) + "\(Int(arc4random_uniform(10000)))"
                 
                 if var completeReport = NSMutableDictionary(contentsOfURL: pListPath)
                 {
@@ -355,8 +359,6 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
                     
              
                     completeReport.setObject(reportDictionary, forKey: "Report Nr. \(UID)")
-                    
-                    //print("CompleteReport: \(completeReport)")
                     
                     if completeReport.writeToURL(pListPath, atomically: true)
                     {
