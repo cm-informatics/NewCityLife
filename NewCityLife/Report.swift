@@ -24,5 +24,14 @@ class Report
         self.locationData = locationData
         self.timestamp = timestamp
     }
+    
+    init()
+    {
+        self.image = UIImage()
+        self.category = ""
+        self.comment = ""
+        self.timestamp = NSDate()
+        self.locationData = (längengrad: 0.0, breitengrad: 0.0)
+    }
 
 }

@@ -11,12 +11,12 @@ import CoreLocation
 
 class ReportsTableViewController: UITableViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
-    
-    var reportDictionary = [NSObject:NSObject]()
+    //var reportDictionary:NSMutableDictionary = [:] // Diese Deklaration wäre vielleicht besser
+    var reportDictionary = [String:AnyObject]()
         {
         didSet
             {
-                //print("Has been set to \(reportDictionary)")
+                print("Has been set to \(reportDictionary)")
                 self.tableView.reloadData()
             }
         }
@@ -34,7 +34,8 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-        let sendButton = UIBarButtonItem(title: "Send", style: .Plain, target: self, action: "sendAction:")
+        //let sendButton = UIBarButtonItem(title: "Send", style: .Plain, target: self, action: "sendAction:")
+        let sendButton = UIBarButtonItem(title: "Send", style: .Plain, target: self, action: #selector(ReportsTableViewController.sendAction(_:)))
         self.navigationItem.rightBarButtonItem = sendButton
         
         let current_date = NSDate()
@@ -110,7 +111,7 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         {
             let imageCell = tableView.dequeueReusableCellWithIdentifier("imageCell", forIndexPath: indexPath) as! ImageTableViewCell
 
-            imageCell.imageCellLabel.text = "Bild"
+            imageCell.imageCellLabel!.text = "Bild"
             //imageCell.detailTextLabel?.text = "wählen"
             if let image = reportDictionary["image"]
             {
@@ -161,13 +162,22 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
             {
                 
                 locationCell.detailTextLabel?.textColor = UIColor.grayColor()
-                locationCell.detailTextLabel?.text = location as? String
+                //locationCell.detailTextLabel?.text = location as? String
+               
+                if (location[0] != nil)
+                {
+                    locationCell.detailTextLabel?.text = "\(location[0]), \(location[1])"
+                }
+                else
+                {
+                    locationCell.detailTextLabel?.text = "Ortsbestimmung nicht möglich"
+                }
+                
             }
             else
             {
                 locationCell.detailTextLabel?.textColor = UIColor.redColor()
                 locationCell.detailTextLabel?.text = "Ortsbestimmung nicht möglich"
-
 
             }
                         
@@ -212,17 +222,22 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         
         manager.stopUpdatingLocation()
 
-        report.locationData.breitengrad = newLocation.coordinate.latitude
         report.locationData.längengrad = newLocation.coordinate.longitude
+        report.locationData.breitengrad = newLocation.coordinate.latitude
         
-        reportDictionary["location"] = "\(newLocation.coordinate.longitude), \(newLocation.coordinate.latitude)"
+        let locationArray = [newLocation.coordinate.longitude, newLocation.coordinate.latitude]
+        
+        reportDictionary["location"] = locationArray
+        
+        print(reportDictionary["location"])
+        
     }
 
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         manager.stopUpdatingLocation()
         print("\(error)")
         
-        //reportDictionary["location"] = "Ortsbestimmung nicht möglich"
+        reportDictionary["location"] = "Ortsbestimmung nicht möglich"
     }
     
     
@@ -271,32 +286,22 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
     {
         print(reportDictionary.count)
         
-        if reportDictionary.count == 5  // Wenn genau vier Werte vorliegen
+        if reportDictionary.count == 5  // Wenn genau fünf Werte vorliegen
         {
             print("Alles drin: \(reportDictionary.values)")
             
             
-            for (_, c) in reportDictionary.keys.enumerate()
-            {
-                switch c
-                {
-                    case "image"    : report.image = reportDictionary["image"] as! UIImage
-                    case "category" : report.category = reportDictionary["category"] as! String
-                    case "comment"  : report.comment = reportDictionary["comment"] as! String
-                    
-                    default: "An error occoured"
-                }
-            }
+            report.image = reportDictionary["image"] as! UIImage
             
             let imageData = NSData(data: UIImageJPEGRepresentation(report.image, 0.2)!)
             reportDictionary["image"] = imageData
             
-            print("Der report: \(report.category)\n\(report.image)\n\(report.comment)")
             
+            print("Der Report: \(report)")
             
+            //Ab hier liegt der report komplett vor
             
             let fileManager = NSFileManager()
-            
             var pListPath: NSURL
             
             let rootPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
@@ -309,7 +314,7 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
                 
                 if fileManager.fileExistsAtPath(reportsPath.path!)
                 {
-                    print("Verzeichnis existiert bereits")
+                    print("Verzeichnis existiert bereits: \(reportsPath)")
                 }
                 else
                 {
@@ -357,7 +362,6 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
                 {
                     completeReport = NSMutableDictionary(dictionary: NSMutableDictionary(contentsOfURL: pListPath)!)
                     
-             
                     completeReport.setObject(reportDictionary, forKey: "Report Nr. \(UID)")
                     
                     if completeReport.writeToURL(pListPath, atomically: true)

@@ -14,5 +14,6 @@ class MyReportsTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var issueImageView: UIImageView!
+    var reportNumber: String = ""
     
 }

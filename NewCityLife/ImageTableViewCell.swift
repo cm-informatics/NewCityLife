@@ -11,7 +11,7 @@ import UIKit
 class ImageTableViewCell: UITableViewCell
 {
     
-    @IBOutlet weak var imageCellLabel: UILabel!
+    @IBOutlet weak var imageCellLabel: UILabel?
     @IBOutlet weak var imageCellImageView: UIImageView!
     
 }

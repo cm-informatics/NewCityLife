@@ -12,6 +12,7 @@ class MyReportsTableViewController: UITableViewController {
 
     var sortedReportKeys: NSArray = []
     var listOfAllReports: NSDictionary = [:]
+    var report: Report = Report()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,9 +48,7 @@ class MyReportsTableViewController: UITableViewController {
             //print(allKeysOfTheReports)
             
             
-            //let sortedReportKeys = allKeysOfTheReports.sortedArrayUsingDescriptors(NSSortDescriptor(key: nil, ascending: false, selector: "compare:"))
-            
-            sortedReportKeys = allKeysOfTheReports.sortedArrayUsingDescriptors([NSSortDescriptor(key: nil, ascending: false, selector: "compare:")])
+            sortedReportKeys = allKeysOfTheReports.sortedArrayUsingDescriptors([NSSortDescriptor(key: nil, ascending: false, selector: #selector(NSNumber.compare(_:)))])
             
             print(sortedReportKeys)
         }
@@ -80,13 +79,18 @@ class MyReportsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("myReportsTableViewCell", forIndexPath: indexPath) as! MyReportsTableViewCell
 
         // Configure the cell...
+        
         let aSingleReport = listOfAllReports.objectForKey(sortedReportKeys.objectAtIndex(indexPath.row)) as! NSDictionary
         
-        //cell.categoryLabel.text = aSingleReport.objectForKey("
+        
+        cell.reportNumber = sortedReportKeys.objectAtIndex(indexPath.row) as! String
+        
         cell.categoryLabel.text = aSingleReport.objectForKey("category") as? String
         cell.dateLabel.text = aSingleReport.objectForKey("date") as? String
         cell.locationLabel.text = aSingleReport.objectForKey("location") as? String
+        cell.locationLabel.text = "\(aSingleReport.objectForKey("location")![0]), \(aSingleReport.objectForKey("location")![1])"
         cell.issueImageView.image = UIImage(data: aSingleReport.objectForKey("image") as! NSData)
+        
         return cell
     }
     
@@ -99,49 +103,62 @@ class MyReportsTableViewController: UITableViewController {
         return "\(listOfAllReports.count) Report(s)"
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        
+        let dtvc: DetailReportTableViewController = segue.destinationViewController as! DetailReportTableViewController
+        
+        let indexPath = tableView.indexPathForSelectedRow
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath!) as! MyReportsTableViewCell
+        print("The ReportNumber is: \(cell.reportNumber)")
+        
+        for singleReport in listOfAllReports
+        {
+            if singleReport.key as! String == cell.reportNumber
+            {
+                print("Bericht gefunden.")
+                let valueDict = singleReport.value as! NSDictionary
+                
+                report.category = valueDict.objectForKey("category") as! String
+                report.comment = valueDict.objectForKey("comment") as! String
+               
+                
+                if let dateTime = valueDict.objectForKey("date")
+                {
+                    let df = NSDateFormatter()
+                    df.dateFormat = "dd-MM-yyy HH:mm:ss"
+                    
+                    report.timestamp = df.dateFromString(dateTime as! String)!
+                }
+                
+                if let locationData = valueDict.valueForKey("location")
+                {
+                    report.locationData.längengrad = locationData.objectAtIndex(0) as! Double
+                    report.locationData.breitengrad = locationData.objectAtIndex(1) as! Double
+                }
+                
+                if let imageData = valueDict.valueForKey("image")
+                {
+                    //print(imageData)
+                    print("Before processing: \(report.image)")
+                    report.image = UIImage(data: imageData as! NSMutableData, scale: 1.0)!
+                    print("After processing: \(report.image)")
+                }
+            }
+        }
+        print("Category: \(report.category)")
+        print("Datum: \(report.timestamp)")
+        print("Location: \(report.locationData)")
+        print("Comment: \(report.comment)")
+        print("Image: \(report.image)")
+        
+        dtvc.report = report
+        
     }
-    */
-
+    
 }
