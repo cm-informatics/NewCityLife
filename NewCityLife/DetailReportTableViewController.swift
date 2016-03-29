@@ -112,11 +112,7 @@ class DetailReportTableViewController: UITableViewController {
         return tableView.rowHeight
     }
 
-    @IBAction func tabOnDetailImageView(sender: UITapGestureRecognizer) {
-        print("ImageCell tabbed")
-        
-    }
-
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -152,14 +148,20 @@ class DetailReportTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        let divc: DetailImageViewController = segue.destinationViewController as! DetailImageViewController
+        
+        divc.report = report
+        print("Segue")
     }
-    */
+    
 
 }

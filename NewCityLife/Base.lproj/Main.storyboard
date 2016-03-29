@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--My Reports Table View Controller-->
@@ -119,7 +120,7 @@
                                 <connections>
                                     <outlet property="imageCellImageView" destination="jcC-NL-9ri" id="9aw-eL-8rv"/>
                                     <outlet property="imageCellLabel" destination="r4N-7d-uXy" id="Zwp-mF-cUW"/>
-                                    <outletCollection property="gestureRecognizers" destination="ZFb-sY-DXV" appends="YES" id="dNC-D9-JQY"/>
+                                    <segue destination="kam-u5-5ya" kind="show" id="hGv-nT-ust"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -131,13 +132,42 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="InE-G6-ipc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="ZFb-sY-DXV">
-                    <connections>
-                        <action selector="tabOnDetailImageView:" destination="nMt-50-SlW" id="3in-GF-Kkq"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1862.5" y="-769.5"/>
+        </scene>
+        <!--Image-->
+        <scene sceneID="mU4-fi-mI0">
+            <objects>
+                <viewController id="kam-u5-5ya" customClass="DetailImageViewController" customModule="NewCityLife" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MXQ-zC-JdB"/>
+                        <viewControllerLayoutGuide type="bottom" id="UMN-BD-a5o"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TG4-No-vZm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j8f-ba-sVu">
+                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="j8f-ba-sVu" firstAttribute="top" secondItem="MXQ-zC-JdB" secondAttribute="bottom" id="IPS-Wd-2tJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="j8f-ba-sVu" secondAttribute="trailing" id="MsC-6Y-MY0"/>
+                            <constraint firstItem="j8f-ba-sVu" firstAttribute="leading" secondItem="TG4-No-vZm" secondAttribute="leadingMargin" id="UTL-wA-rfD"/>
+                            <constraint firstItem="UMN-BD-a5o" firstAttribute="top" secondItem="j8f-ba-sVu" secondAttribute="bottom" id="i4X-Pt-4IL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Image" id="lOj-Z5-TnQ"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="fullImageView" destination="j8f-ba-sVu" id="xU0-gw-1KN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5KS-mN-Wt9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2298.5" y="-769.5"/>
         </scene>
         <!--Hauptmenü-->
         <scene sceneID="tne-QT-ifu">
