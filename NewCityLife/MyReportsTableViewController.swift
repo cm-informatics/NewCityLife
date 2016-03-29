@@ -144,18 +144,18 @@ class MyReportsTableViewController: UITableViewController {
                 
                 if let imageData = valueDict.valueForKey("image")
                 {
-                    //print(imageData)
-                    print("Before processing: \(report.image)")
                     report.image = UIImage(data: imageData as! NSMutableData, scale: 1.0)!
-                    print("After processing: \(report.image)")
                 }
             }
         }
+        
+        /*
         print("Category: \(report.category)")
         print("Datum: \(report.timestamp)")
         print("Location: \(report.locationData)")
         print("Comment: \(report.comment)")
         print("Image: \(report.image)")
+         */
         
         dtvc.report = report
         

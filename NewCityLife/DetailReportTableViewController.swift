@@ -112,7 +112,10 @@ class DetailReportTableViewController: UITableViewController {
         return tableView.rowHeight
     }
 
-    
+    @IBAction func tabOnDetailImageView(sender: UITapGestureRecognizer) {
+        print("ImageCell tabbed")
+        
+    }
 
     /*
     // Override to support conditional editing of the table view.
