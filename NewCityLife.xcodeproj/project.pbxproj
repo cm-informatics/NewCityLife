@@ -11,6 +11,7 @@
 		AA0F2B2D1C60D4C9006B9DBD /* MyReportsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F2B2C1C60D4C9006B9DBD /* MyReportsTableViewCell.swift */; };
 		AA2369621CA6D3A8009A05AA /* DetailReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2369611CA6D3A8009A05AA /* DetailReportTableViewController.swift */; };
 		AA2372191CAAA51100A1422B /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2372181CAAA51100A1422B /* DetailImageViewController.swift */; };
+		AA23721B1CAAE83000A1422B /* FullCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA23721A1CAAE83000A1422B /* FullCommentViewController.swift */; };
 		AA2C68661C56339100ACF1BF /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C68651C56339100ACF1BF /* ImageTableViewCell.swift */; };
 		AA2C68681C5635FB00ACF1BF /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2C68671C5635FB00ACF1BF /* defaultPhoto.png */; };
 		AAACB8D81C46B4A2007F558D /* menu_button.png in Resources */ = {isa = PBXBuildFile; fileRef = AAACB8D71C46B4A2007F558D /* menu_button.png */; };
@@ -31,6 +32,7 @@
 		AA0F2B2C1C60D4C9006B9DBD /* MyReportsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReportsTableViewCell.swift; sourceTree = "<group>"; };
 		AA2369611CA6D3A8009A05AA /* DetailReportTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailReportTableViewController.swift; sourceTree = "<group>"; };
 		AA2372181CAAA51100A1422B /* DetailImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
+		AA23721A1CAAE83000A1422B /* FullCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullCommentViewController.swift; sourceTree = "<group>"; };
 		AA2C68651C56339100ACF1BF /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		AA2C68671C5635FB00ACF1BF /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
 		AAACB8D71C46B4A2007F558D /* menu_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button.png; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				AAB465181C46A6AB00AC150A /* Main.storyboard */,
 				AA0F2B2A1C5FA44D006B9DBD /* MyReportsTableViewController.swift */,
 				AA2369611CA6D3A8009A05AA /* DetailReportTableViewController.swift */,
+				AA23721A1CAAE83000A1422B /* FullCommentViewController.swift */,
 				AA2372181CAAA51100A1422B /* DetailImageViewController.swift */,
 				AAB4651B1C46A6AB00AC150A /* Assets.xcassets */,
 				AAB4651D1C46A6AB00AC150A /* LaunchScreen.storyboard */,
@@ -203,6 +206,7 @@
 				AA2372191CAAA51100A1422B /* DetailImageViewController.swift in Sources */,
 				AA2369621CA6D3A8009A05AA /* DetailReportTableViewController.swift in Sources */,
 				AAB465271C46A6E600AC150A /* Report.swift in Sources */,
+				AA23721B1CAAE83000A1422B /* FullCommentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

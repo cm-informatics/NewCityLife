@@ -51,7 +51,7 @@ class DetailReportTableViewController: UITableViewController {
         if indexPath.row == 0
         {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath)
             cell.textLabel?.text = keyArray.objectAtIndex(indexPath.row) as? String
 
             cell.detailTextLabel?.text = "\(report.category)"
@@ -60,7 +60,7 @@ class DetailReportTableViewController: UITableViewController {
         
         else if indexPath.row == 1
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("dateCell", forIndexPath: indexPath)
             cell.textLabel?.text = keyArray.objectAtIndex(indexPath.row) as? String
 
             cell.detailTextLabel?.text = "\(report.timestamp)"
@@ -69,7 +69,7 @@ class DetailReportTableViewController: UITableViewController {
         
         else if indexPath.row == 2
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("locationCell", forIndexPath: indexPath)
             cell.textLabel?.text = keyArray.objectAtIndex(indexPath.row) as? String
 
             cell.detailTextLabel?.text = "\(report.locationData.längengrad), \(report.locationData.breitengrad)"
@@ -78,7 +78,7 @@ class DetailReportTableViewController: UITableViewController {
 
         else if indexPath.row == 3
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("commentCell", forIndexPath: indexPath)
             cell.textLabel?.text = keyArray.objectAtIndex(indexPath.row) as? String
 
             cell.detailTextLabel?.text = "\(report.comment)"
@@ -154,14 +154,16 @@ class DetailReportTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-        let divc: DetailImageViewController = segue.destinationViewController as! DetailImageViewController
-        
-        divc.report = report
-        print("Segue")
+        if segue.identifier == "fullImageSegue"
+        {
+            let divc: DetailImageViewController = segue.destinationViewController as! DetailImageViewController
+            divc.report = report
+        }
+        if segue.identifier == "commentSegue"
+        {
+            let fcvc:FullCommentViewController = segue.destinationViewController as! FullCommentViewController
+            fcvc.report = report
+        }
     }
     
-
 }
