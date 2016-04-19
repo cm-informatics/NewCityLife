@@ -164,6 +164,12 @@ class DetailReportTableViewController: UITableViewController {
             let fcvc:FullCommentViewController = segue.destinationViewController as! FullCommentViewController
             fcvc.report = report
         }
+        if segue.identifier == "locationSegue"
+        {
+            let mvv:MapViewViewController = segue.destinationViewController as! MapViewViewController
+            mvv.report = report
+            
+        }
     }
     
 }

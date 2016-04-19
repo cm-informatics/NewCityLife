@@ -45,8 +45,6 @@ class MyReportsTableViewController: UITableViewController {
             listOfAllReports = NSMutableDictionary(contentsOfURL: pListPath)!
             let allKeysOfTheReports = NSArray(array: listOfAllReports.allKeys)
             
-            //print(allKeysOfTheReports)
-            
             
             sortedReportKeys = allKeysOfTheReports.sortedArrayUsingDescriptors([NSSortDescriptor(key: nil, ascending: false, selector: #selector(NSNumber.compare(_:)))])
             
@@ -58,7 +56,7 @@ class MyReportsTableViewController: UITableViewController {
         }
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

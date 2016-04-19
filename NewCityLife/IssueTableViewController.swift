@@ -10,7 +10,7 @@ import UIKit
 
 class IssueTableViewController: UITableViewController {
 
-    var issues = ["Grafitti", "Verschmutzung", "Sachschaden", "Parkplatzmangel"]
+    var issues = ["Grafitti", "Verschmutzung", "Sachschaden", "Parkplatzmangel", "Wasserschaden", "Brandschaden"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

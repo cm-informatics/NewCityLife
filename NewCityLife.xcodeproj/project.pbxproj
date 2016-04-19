@@ -9,9 +9,12 @@
 /* Begin PBXBuildFile section */
 		AA0F2B2B1C5FA44D006B9DBD /* MyReportsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F2B2A1C5FA44D006B9DBD /* MyReportsTableViewController.swift */; };
 		AA0F2B2D1C60D4C9006B9DBD /* MyReportsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F2B2C1C60D4C9006B9DBD /* MyReportsTableViewCell.swift */; };
+		AA0F87721CC58C010052D9F8 /* x-image.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0F87711CC58C010052D9F8 /* x-image.png */; };
 		AA2369621CA6D3A8009A05AA /* DetailReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2369611CA6D3A8009A05AA /* DetailReportTableViewController.swift */; };
 		AA2372191CAAA51100A1422B /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2372181CAAA51100A1422B /* DetailImageViewController.swift */; };
 		AA23721B1CAAE83000A1422B /* FullCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA23721A1CAAE83000A1422B /* FullCommentViewController.swift */; };
+		AA23725D1CAC439800A1422B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA23725C1CAC439800A1422B /* MapKit.framework */; };
+		AA2372601CAC451800A1422B /* MapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA23725F1CAC451800A1422B /* MapViewViewController.swift */; };
 		AA2C68661C56339100ACF1BF /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C68651C56339100ACF1BF /* ImageTableViewCell.swift */; };
 		AA2C68681C5635FB00ACF1BF /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2C68671C5635FB00ACF1BF /* defaultPhoto.png */; };
 		AAACB8D81C46B4A2007F558D /* menu_button.png in Resources */ = {isa = PBXBuildFile; fileRef = AAACB8D71C46B4A2007F558D /* menu_button.png */; };
@@ -30,9 +33,12 @@
 /* Begin PBXFileReference section */
 		AA0F2B2A1C5FA44D006B9DBD /* MyReportsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReportsTableViewController.swift; sourceTree = "<group>"; };
 		AA0F2B2C1C60D4C9006B9DBD /* MyReportsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReportsTableViewCell.swift; sourceTree = "<group>"; };
+		AA0F87711CC58C010052D9F8 /* x-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "x-image.png"; sourceTree = "<group>"; };
 		AA2369611CA6D3A8009A05AA /* DetailReportTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailReportTableViewController.swift; sourceTree = "<group>"; };
 		AA2372181CAAA51100A1422B /* DetailImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
 		AA23721A1CAAE83000A1422B /* FullCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullCommentViewController.swift; sourceTree = "<group>"; };
+		AA23725C1CAC439800A1422B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		AA23725F1CAC451800A1422B /* MapViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewViewController.swift; sourceTree = "<group>"; };
 		AA2C68651C56339100ACF1BF /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		AA2C68671C5635FB00ACF1BF /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
 		AAACB8D71C46B4A2007F558D /* menu_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button.png; sourceTree = "<group>"; };
@@ -55,12 +61,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA23725D1CAC439800A1422B /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA23725E1CAC43A600A1422B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA23725C1CAC439800A1422B /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AA2C68691C56361A00ACF1BF /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +93,7 @@
 				AAB465131C46A6AB00AC150A /* NewCityLife */,
 				AA2C68691C56361A00ACF1BF /* CustomCells */,
 				AAB465121C46A6AB00AC150A /* Products */,
+				AA23725E1CAC43A600A1422B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +119,7 @@
 				AA2369611CA6D3A8009A05AA /* DetailReportTableViewController.swift */,
 				AA23721A1CAAE83000A1422B /* FullCommentViewController.swift */,
 				AA2372181CAAA51100A1422B /* DetailImageViewController.swift */,
+				AA23725F1CAC451800A1422B /* MapViewViewController.swift */,
 				AAB4651B1C46A6AB00AC150A /* Assets.xcassets */,
 				AAB4651D1C46A6AB00AC150A /* LaunchScreen.storyboard */,
 				AAB465201C46A6AB00AC150A /* Info.plist */,
@@ -114,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				AA2C68671C5635FB00ACF1BF /* defaultPhoto.png */,
+				AA0F87711CC58C010052D9F8 /* x-image.png */,
 				AACE417C1C4B9E250078BE17 /* white_town.jpg */,
 				AAACB8D71C46B4A2007F558D /* menu_button.png */,
 			);
@@ -181,6 +199,7 @@
 			files = (
 				AAB4651F1C46A6AB00AC150A /* LaunchScreen.storyboard in Resources */,
 				AACE417D1C4B9E250078BE17 /* white_town.jpg in Resources */,
+				AA0F87721CC58C010052D9F8 /* x-image.png in Resources */,
 				AAACB8D81C46B4A2007F558D /* menu_button.png in Resources */,
 				AAB4651C1C46A6AB00AC150A /* Assets.xcassets in Resources */,
 				AA2C68681C5635FB00ACF1BF /* defaultPhoto.png in Resources */,
@@ -199,6 +218,7 @@
 				AAF232311C47A74F00558A11 /* IssueTableViewController.swift in Sources */,
 				AA0F2B2D1C60D4C9006B9DBD /* MyReportsTableViewCell.swift in Sources */,
 				AAB465171C46A6AB00AC150A /* ViewController.swift in Sources */,
+				AA2372601CAC451800A1422B /* MapViewViewController.swift in Sources */,
 				AAB1F95F1C47E547004D0437 /* CommentViewController.swift in Sources */,
 				AAB465151C46A6AB00AC150A /* AppDelegate.swift in Sources */,
 				AA0F2B2B1C5FA44D006B9DBD /* MyReportsTableViewController.swift in Sources */,
