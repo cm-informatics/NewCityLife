@@ -244,6 +244,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="mapView" destination="vwh-ir-R46" id="EXY-Up-rx2"/>
+                        <segue destination="kam-u5-5ya" kind="show" identifier="calloutSegue" id="BY3-uv-BdO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pvY-lk-hz7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -677,4 +678,7 @@
         <image name="menu_button.png" width="600" height="200"/>
         <image name="white_town.jpg" width="2446" height="1631"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="BY3-uv-BdO"/>
+    </inferredMetricsTieBreakers>
 </document>

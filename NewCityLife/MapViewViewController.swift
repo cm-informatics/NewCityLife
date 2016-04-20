@@ -14,7 +14,10 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     var report:Report = Report()
     
-    var customView: UIView = UIView(frame: CGRectMake(10, 10, 300, 100))
+    let kWidth:CGFloat = 300
+    
+    
+    //var customView: UIView = UIView(frame: CGRectMake(10, 10, 300, 100))
     
     override func viewDidLoad()
     {
@@ -37,8 +40,53 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
         mapView.addAnnotation(annotation)
         //mapView.addAnnotation(<#T##annotation: MKAnnotation##MKAnnotation#>)
         
-        
     }
+    
+    // MARK: - CustomView
+    
+    func additionalCallout(heightOfStandardCallout: CGFloat) -> UIView
+    {
+        var customView = UIView()
+        
+        if heightOfStandardCallout <= 180.0
+        {
+            print("drunter")
+            customView = UIView(frame: CGRectMake((self.view.frame.size.width-kWidth)/2, 150, kWidth, 100))
+        }
+        else
+        {
+            print("drüber")
+            customView = UIView(frame: CGRectMake((self.view.frame.size.width-kWidth)/2, heightOfStandardCallout-200, kWidth, 100))
+        }
+        
+        
+        let customButton = UIButton(type: .Custom)
+        customButton.frame = CGRectMake(280, 0, 20, 20)
+        customButton.setImage(UIImage(named: "x-image.png"), forState: .Normal)
+        customButton.addTarget(self, action: #selector(doAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        let customLabel = UILabel(frame: CGRectMake(5, 5, 295, 95))
+        customLabel.numberOfLines = 0
+        customLabel.font = UIFont(name: "Verdana", size: 10)
+        customLabel.text = "Hier könnten zusätzliche Infos stehen."
+        
+        
+        customView.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.8)
+        customView.layer.borderWidth = 1.5
+        customView.layer.borderColor = UIColor.blackColor().CGColor
+        customView.addSubview(customButton)
+        customView.addSubview(customLabel)
+        
+        
+        return customView
+    }
+    
+    func doAction(buttonView: UIView)
+    {
+        buttonView.superview?.removeFromSuperview()
+    }
+
+    // MARK: - MapView Delegate
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -63,51 +111,29 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
         annotationImageView.image = report.image
         annotationView?.leftCalloutAccessoryView = annotationImageView
 
-        
         return annotationView
 }
     
-    func doAction()
-    {
-        customView.removeFromSuperview()
-    }
-    
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
-        let customButton = UIButton(type: .Custom)
-        customButton.frame = CGRectMake(280, 0, 20, 20)
-        customButton.setImage(UIImage(named: "x-image.png"), forState: .Normal)
-        customButton.addTarget(self, action: #selector(doAction), forControlEvents: UIControlEvents.TouchUpInside)
+        //mapView.addSubview(additionalCallout(view.frame.origin.y))
         
-        let customLabel = UILabel(frame: CGRectMake(5, 5, 295, 95))
-        customLabel.numberOfLines = 0
-        customLabel.font = UIFont(name: "Verdana", size: 10)
-        customLabel.text = "Hier könnten zusätzliche Infos stehen."
-        
-        
-        customView.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.8)
-        customView.layer.borderWidth = 1.5
-        customView.layer.borderColor = UIColor.blackColor().CGColor
-        customView.addSubview(customButton)
-        customView.addSubview(customLabel)
-        
-        print(view.frame.origin.y)
-        
-        mapView.addSubview(customView)
+        performSegueWithIdentifier("calloutSegue", sender: view)
         
     }
     
-    
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == "calloutSegue"
+        {
+            let divc: DetailImageViewController = segue.destinationViewController as! DetailImageViewController
+            divc.report = report
+            
+        }
     }
-    */
+ 
 
 }
