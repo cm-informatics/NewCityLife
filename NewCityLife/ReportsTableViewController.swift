@@ -17,7 +17,7 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         didSet
             {
                 print("Has been set to \(reportDictionary)")
-                self.tableView.reloadData()
+                //self.tableView.reloadData()
             }
         }
 
@@ -28,13 +28,16 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
     
     // MARK: - AppLifeCycle
     
+   override func viewWillAppear(animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        // self.clearsSelectionOnViewWillAppear = true
         
-        //let sendButton = UIBarButtonItem(title: "Send", style: .Plain, target: self, action: "sendAction:")
         let sendButton = UIBarButtonItem(title: "Send", style: .Plain, target: self, action: #selector(ReportsTableViewController.sendAction(_:)))
         self.navigationItem.rightBarButtonItem = sendButton
         
@@ -60,14 +63,12 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         {
             print("Location Service not enabled")
         }
-       
     }
     
     // MARK: - Unwind Segues
     
     @IBAction func backNavigation(sender: UIStoryboardSegue)
     {
-        //print("Der Identifier ist: \(sender.identifier!)")
         
         if sender.identifier! == "categoryUnwind"
         {
@@ -112,29 +113,15 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
             let imageCell = tableView.dequeueReusableCellWithIdentifier("imageCell", forIndexPath: indexPath) as! ImageTableViewCell
 
             imageCell.imageCellLabel!.text = "Bild"
-            //imageCell.detailTextLabel?.text = "wählen"
+            
             if let image = reportDictionary["image"]
             {
                 imageCell.imageCellImageView.image = image as? UIImage
-                
-                /*let imageData: NSData = UIImageJPEGRepresentation(image as! UIImage, 0.2)!
-                print(imageData)
-                reportDictionary["image"] = imageData
-                */
-                
-               /* if let imageData = image as? UIImage
-                {
-                    let imageData = NSData(data: UIImageJPEGRepresentation(imageData, 0.2)!)
-                    print(imageData)
-                    reportDictionary["image"] = imageData
-                }
-                */
-                
-                
             }
             
             return imageCell
         }
+            
         else if indexPath.row == 1
         {
             let categoryCell = tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath)
@@ -241,15 +228,36 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
     }
     
     
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "commentSegue"
+        {
+            let indexPath = self.tableView.indexPathForSelectedRow
+            let cell = self.tableView(self.tableView, cellForRowAtIndexPath: indexPath!)
+            
+            if cell.detailTextLabel?.text != "wählen"
+            {
+                let navigationController: UINavigationController = segue.destinationViewController as! UINavigationController
+                
+                if let cvc: CommentViewController = navigationController.visibleViewController as? CommentViewController
+                {
+                    if let text = cell.detailTextLabel?.text
+                    {
+                        cvc.commentText = text
+                    }
+                }
+                
+            }
+            
+        }
     }
-    */
+    
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0

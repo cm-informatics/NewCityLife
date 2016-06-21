@@ -86,6 +86,12 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
         buttonView.superview?.removeFromSuperview()
     }
 
+    func handleTap(gestureRecognizer: UITapGestureRecognizer)
+    {
+        print("You tapped the \(gestureRecognizer.view!.classForCoder)")
+        self.performSegueWithIdentifier("calloutSegue", sender: gestureRecognizer)
+    }
+    
     // MARK: - MapView Delegate
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -110,7 +116,12 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
         let annotationImageView = UIImageView(frame: CGRectMake(0, 0, 59, 59))
         annotationImageView.image = report.image
         annotationView?.leftCalloutAccessoryView = annotationImageView
-
+        
+        annotationImageView.userInteractionEnabled = true
+        
+        let tgr = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        annotationImageView.addGestureRecognizer(tgr)
+        
         return annotationView
 }
     
@@ -119,10 +130,8 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
         //mapView.addSubview(additionalCallout(view.frame.origin.y))
         
         performSegueWithIdentifier("calloutSegue", sender: view)
-        
     }
     
-
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
@@ -131,9 +140,6 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
         {
             let divc: DetailImageViewController = segue.destinationViewController as! DetailImageViewController
             divc.report = report
-            
         }
     }
- 
-
 }

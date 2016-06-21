@@ -12,6 +12,16 @@ class CommentViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var commentTextView: UITextView!
     
+    var commentText: String = ""
+        {
+        didSet
+        {
+            //commentTextView.text = commentText
+            print("Kommentar wurde gesetzt")
+        }
+    }
+
+    
     override func viewWillAppear(animated: Bool)
     {
         commentTextView.becomeFirstResponder()
@@ -25,12 +35,7 @@ class CommentViewController: UIViewController, UITextViewDelegate {
         commentTextView.layer.borderWidth = 0.5
         commentTextView.layer.borderColor = UIColor.init(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).CGColor
         commentTextView.layer.cornerRadius = 6.0
-    }
-    
-    
-    func textViewDidBeginEditing(textView: UITextView)
-    {
-        
+        commentTextView.text = commentText
     }
     
    

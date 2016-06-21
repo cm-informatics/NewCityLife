@@ -73,6 +73,7 @@ class DetailReportTableViewController: UITableViewController {
             cell.textLabel?.text = keyArray.objectAtIndex(indexPath.row) as? String
 
             cell.detailTextLabel?.text = "\(report.locationData.längengrad), \(report.locationData.breitengrad)"
+            cell.accessoryType = .DisclosureIndicator
             return cell
         }
 
@@ -82,6 +83,7 @@ class DetailReportTableViewController: UITableViewController {
             cell.textLabel?.text = keyArray.objectAtIndex(indexPath.row) as? String
 
             cell.detailTextLabel?.text = "\(report.comment)"
+            cell.accessoryType = .DisclosureIndicator
             return cell
         }
 
@@ -91,6 +93,7 @@ class DetailReportTableViewController: UITableViewController {
             
             imageCell.imageCellLabel?.text = keyArray.objectAtIndex(indexPath.row) as? String
             imageCell.imageCellImageView.image = report.image
+            imageCell.accessoryType = .DisclosureIndicator
             
             return imageCell
 
