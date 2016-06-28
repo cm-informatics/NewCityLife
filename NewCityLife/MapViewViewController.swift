@@ -89,7 +89,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
     func handleTap(gestureRecognizer: UITapGestureRecognizer)
     {
         print("You tapped the \(gestureRecognizer.view!.classForCoder)")
-        self.performSegueWithIdentifier("calloutSegue", sender: gestureRecognizer)
+        self.performSegueWithIdentifier("calloutImageSegue", sender: gestureRecognizer)
     }
     
     // MARK: - MapView Delegate
@@ -129,17 +129,24 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
         
         //mapView.addSubview(additionalCallout(view.frame.origin.y))
         
-        performSegueWithIdentifier("calloutSegue", sender: view)
+        performSegueWithIdentifier("calloutCommentSegue", sender: view)
     }
     
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
-        if segue.identifier == "calloutSegue"
+        if segue.identifier == "calloutImageSegue"
         {
             let divc: DetailImageViewController = segue.destinationViewController as! DetailImageViewController
             divc.report = report
+        }
+        
+        if segue.identifier == "calloutCommentSegue"
+        {
+            let fcvc: FullCommentViewController = segue.destinationViewController as! FullCommentViewController
+            fcvc.report = report
+            
         }
     }
 }

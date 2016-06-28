@@ -244,12 +244,13 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="mapView" destination="vwh-ir-R46" id="EXY-Up-rx2"/>
-                        <segue destination="kam-u5-5ya" kind="show" identifier="calloutSegue" id="BY3-uv-BdO"/>
+                        <segue destination="kam-u5-5ya" kind="show" identifier="calloutImageSegue" id="BY3-uv-BdO"/>
+                        <segue destination="ruJ-Ac-oNt" kind="show" identifier="calloutCommentSegue" id="xmK-3L-T2f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pvY-lk-hz7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2351.5" y="-2258.5"/>
+            <point key="canvasLocation" x="2351.5" y="-2305.5"/>
         </scene>
         <!--Beschreibung-->
         <scene sceneID="KQs-gA-uwp">
@@ -680,5 +681,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="BY3-uv-BdO"/>
+        <segue reference="xmK-3L-T2f"/>
     </inferredMetricsTieBreakers>
 </document>
