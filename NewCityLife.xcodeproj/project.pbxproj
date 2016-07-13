@@ -28,7 +28,7 @@
 		AAE6EA781D2519F400554A38 /* schild.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAE6EA771D2519F400554A38 /* schild.jpg */; };
 		AAEA7FF31D27CB4C0021A6A9 /* karikatur-skyline.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAEA7FF21D27CB4C0021A6A9 /* karikatur-skyline.jpg */; };
 		AAF232311C47A74F00558A11 /* IssueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF232301C47A74F00558A11 /* IssueTableViewController.swift */; };
-		AAFB52A91D36C32300E03E75 /* README.MD in Sources */ = {isa = PBXBuildFile; fileRef = AAFB52A81D36C32300E03E75 /* README.MD */; };
+		AAFB52AD1D36C6C400E03E75 /* README.TXT in Resources */ = {isa = PBXBuildFile; fileRef = AAFB52AC1D36C6C400E03E75 /* README.TXT */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,7 +55,7 @@
 		AAE6EA771D2519F400554A38 /* schild.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = schild.jpg; sourceTree = "<group>"; };
 		AAEA7FF21D27CB4C0021A6A9 /* karikatur-skyline.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "karikatur-skyline.jpg"; sourceTree = "<group>"; };
 		AAF232301C47A74F00558A11 /* IssueTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueTableViewController.swift; sourceTree = "<group>"; };
-		AAFB52A81D36C32300E03E75 /* README.MD */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.MD; sourceTree = SOURCE_ROOT; };
+		AAFB52AC1D36C6C400E03E75 /* README.TXT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.TXT; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +125,7 @@
 				AAB4651B1C46A6AB00AC150A /* Assets.xcassets */,
 				AAB4651D1C46A6AB00AC150A /* LaunchScreen.storyboard */,
 				AAB465201C46A6AB00AC150A /* Info.plist */,
-				AAFB52A81D36C32300E03E75 /* README.MD */,
+				AAFB52AC1D36C6C400E03E75 /* README.TXT */,
 			);
 			path = NewCityLife;
 			sourceTree = "<group>";
@@ -202,6 +202,7 @@
 			files = (
 				AAE6EA781D2519F400554A38 /* schild.jpg in Resources */,
 				AAB4651F1C46A6AB00AC150A /* LaunchScreen.storyboard in Resources */,
+				AAFB52AD1D36C6C400E03E75 /* README.TXT in Resources */,
 				AA0F87721CC58C010052D9F8 /* x-image.png in Resources */,
 				AAEA7FF31D27CB4C0021A6A9 /* karikatur-skyline.jpg in Resources */,
 				AAB4651C1C46A6AB00AC150A /* Assets.xcassets in Resources */,
@@ -221,7 +222,6 @@
 				AAF232311C47A74F00558A11 /* IssueTableViewController.swift in Sources */,
 				AA0F2B2D1C60D4C9006B9DBD /* MyReportsTableViewCell.swift in Sources */,
 				AAB465171C46A6AB00AC150A /* ViewController.swift in Sources */,
-				AAFB52A91D36C32300E03E75 /* README.MD in Sources */,
 				AA2372601CAC451800A1422B /* MapViewViewController.swift in Sources */,
 				AAB1F95F1C47E547004D0437 /* CommentViewController.swift in Sources */,
 				AAB465151C46A6AB00AC150A /* AppDelegate.swift in Sources */,
