@@ -17,7 +17,6 @@
 		AA2372601CAC451800A1422B /* MapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA23725F1CAC451800A1422B /* MapViewViewController.swift */; };
 		AA2C68661C56339100ACF1BF /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C68651C56339100ACF1BF /* ImageTableViewCell.swift */; };
 		AA2C68681C5635FB00ACF1BF /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2C68671C5635FB00ACF1BF /* defaultPhoto.png */; };
-		AAACB8D81C46B4A2007F558D /* menu_button.png in Resources */ = {isa = PBXBuildFile; fileRef = AAACB8D71C46B4A2007F558D /* menu_button.png */; };
 		AAACB8DA1C46C6D7007F558D /* ReportsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAACB8D91C46C6D7007F558D /* ReportsTableViewController.swift */; };
 		AAB1F95F1C47E547004D0437 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB1F95E1C47E547004D0437 /* CommentViewController.swift */; };
 		AAB465151C46A6AB00AC150A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB465141C46A6AB00AC150A /* AppDelegate.swift */; };
@@ -26,7 +25,8 @@
 		AAB4651C1C46A6AB00AC150A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAB4651B1C46A6AB00AC150A /* Assets.xcassets */; };
 		AAB4651F1C46A6AB00AC150A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAB4651D1C46A6AB00AC150A /* LaunchScreen.storyboard */; };
 		AAB465271C46A6E600AC150A /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB465261C46A6E600AC150A /* Report.swift */; };
-		AACE417D1C4B9E250078BE17 /* white_town.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AACE417C1C4B9E250078BE17 /* white_town.jpg */; };
+		AAE6EA781D2519F400554A38 /* schild.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAE6EA771D2519F400554A38 /* schild.jpg */; };
+		AAEA7FF31D27CB4C0021A6A9 /* karikatur-skyline.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAEA7FF21D27CB4C0021A6A9 /* karikatur-skyline.jpg */; };
 		AAF232311C47A74F00558A11 /* IssueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF232301C47A74F00558A11 /* IssueTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +41,6 @@
 		AA23725F1CAC451800A1422B /* MapViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewViewController.swift; sourceTree = "<group>"; };
 		AA2C68651C56339100ACF1BF /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		AA2C68671C5635FB00ACF1BF /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
-		AAACB8D71C46B4A2007F558D /* menu_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button.png; sourceTree = "<group>"; };
 		AAACB8D91C46C6D7007F558D /* ReportsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportsTableViewController.swift; sourceTree = "<group>"; };
 		AAB1F95E1C47E547004D0437 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		AAB465111C46A6AB00AC150A /* NewCityLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewCityLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,7 +51,8 @@
 		AAB4651E1C46A6AB00AC150A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AAB465201C46A6AB00AC150A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAB465261C46A6E600AC150A /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
-		AACE417C1C4B9E250078BE17 /* white_town.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = white_town.jpg; sourceTree = "<group>"; };
+		AAE6EA771D2519F400554A38 /* schild.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = schild.jpg; sourceTree = "<group>"; };
+		AAEA7FF21D27CB4C0021A6A9 /* karikatur-skyline.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "karikatur-skyline.jpg"; sourceTree = "<group>"; };
 		AAF232301C47A74F00558A11 /* IssueTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,10 +130,10 @@
 		AAB465281C46AEE500AC150A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AAEA7FF21D27CB4C0021A6A9 /* karikatur-skyline.jpg */,
+				AAE6EA771D2519F400554A38 /* schild.jpg */,
 				AA2C68671C5635FB00ACF1BF /* defaultPhoto.png */,
 				AA0F87711CC58C010052D9F8 /* x-image.png */,
-				AACE417C1C4B9E250078BE17 /* white_town.jpg */,
-				AAACB8D71C46B4A2007F558D /* menu_button.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -197,10 +197,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAE6EA781D2519F400554A38 /* schild.jpg in Resources */,
 				AAB4651F1C46A6AB00AC150A /* LaunchScreen.storyboard in Resources */,
-				AACE417D1C4B9E250078BE17 /* white_town.jpg in Resources */,
 				AA0F87721CC58C010052D9F8 /* x-image.png in Resources */,
-				AAACB8D81C46B4A2007F558D /* menu_button.png in Resources */,
+				AAEA7FF31D27CB4C0021A6A9 /* karikatur-skyline.jpg in Resources */,
 				AAB4651C1C46A6AB00AC150A /* Assets.xcassets in Resources */,
 				AA2C68681C5635FB00ACF1BF /* defaultPhoto.png in Resources */,
 				AAB4651A1C46A6AB00AC150A /* Main.storyboard in Resources */,

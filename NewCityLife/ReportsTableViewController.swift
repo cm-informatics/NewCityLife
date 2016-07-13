@@ -216,7 +216,8 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         
         reportDictionary["location"] = locationArray
         
-        print(reportDictionary["location"])
+        print("The Location is: \((reportDictionary["location"])!)")
+        self.tableView.reloadData()
         
     }
 

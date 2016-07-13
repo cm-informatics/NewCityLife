@@ -92,6 +92,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
         self.performSegueWithIdentifier("calloutImageSegue", sender: gestureRecognizer)
     }
     
+    
     // MARK: - MapView Delegate
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
