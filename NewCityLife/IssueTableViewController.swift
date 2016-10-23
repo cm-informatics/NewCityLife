@@ -29,29 +29,29 @@ class IssueTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    override func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return issues.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("issueCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "issueCell", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = issues[indexPath.row]
+        cell.textLabel?.text = issues[(indexPath as NSIndexPath).row]
 
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        print("Row \(indexPath.row) was selected")
+        print("Row \((indexPath as NSIndexPath).row) was selected")
         
        /* if let cell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)
         {
@@ -74,9 +74,9 @@ class IssueTableViewController: UITableViewController {
     
     // MARK: - BarButton Actions
     
-    @IBAction func cancelAction(sender: UIBarButtonItem)
+    @IBAction func cancelAction(_ sender: UIBarButtonItem)
     {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
     /*

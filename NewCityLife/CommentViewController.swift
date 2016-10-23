@@ -22,7 +22,7 @@ class CommentViewController: UIViewController, UITextViewDelegate {
     }
 
     
-    override func viewWillAppear(animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
         commentTextView.becomeFirstResponder()
     }
@@ -33,7 +33,7 @@ class CommentViewController: UIViewController, UITextViewDelegate {
         self.automaticallyAdjustsScrollViewInsets = false
         
         commentTextView.layer.borderWidth = 0.5
-        commentTextView.layer.borderColor = UIColor.init(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).CGColor
+        commentTextView.layer.borderColor = UIColor.init(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).cgColor
         commentTextView.layer.cornerRadius = 6.0
         commentTextView.text = commentText
     }
@@ -45,23 +45,23 @@ class CommentViewController: UIViewController, UITextViewDelegate {
     }
     
 
-    @IBAction func cancelAction(sender: UIBarButtonItem)
+    @IBAction func cancelAction(_ sender: UIBarButtonItem)
     {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
-    @IBAction func saveAction(sender: UIBarButtonItem)
+    @IBAction func saveAction(_ sender: UIBarButtonItem)
     {
         let vc:ReportsTableViewController = ReportsTableViewController()
         
         if let value = commentTextView.text
         {
             //vc.comment = value
-            vc.reportDictionary["comment"] = value
+            vc.reportDictionary["comment"] = value as AnyObject?
         }
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     /*

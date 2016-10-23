@@ -25,47 +25,48 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
 
         // Do any additional setup after loading the view.
         
+        if report.category != ""
+        {
         let location = CLLocationCoordinate2D(latitude: report.locationData.breitengrad, longitude: report.locationData.längengrad)
         
-        let span = MKCoordinateSpanMake(0.25, 0.25)
-        let region = MKCoordinateRegion(center: location, span: span)
-        mapView.setRegion(region, animated: true)
+            let span = MKCoordinateSpanMake(0.25, 0.25)
+            let region = MKCoordinateRegion(center: location, span: span)
+            mapView.setRegion(region, animated: true)
         
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = location
-        annotation.title = report.category
-        annotation.subtitle = report.comment
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = location
+            annotation.title = report.category
+            annotation.subtitle = report.comment
         
-        
-        mapView.addAnnotation(annotation)
-        //mapView.addAnnotation(<#T##annotation: MKAnnotation##MKAnnotation#>)
+            mapView.addAnnotation(annotation)
+        }
         
     }
     
     // MARK: - CustomView
     
-    func additionalCallout(heightOfStandardCallout: CGFloat) -> UIView
+    func additionalCallout(_ heightOfStandardCallout: CGFloat) -> UIView
     {
         var customView = UIView()
         
         if heightOfStandardCallout <= 180.0
         {
             print("drunter")
-            customView = UIView(frame: CGRectMake((self.view.frame.size.width-kWidth)/2, 150, kWidth, 100))
+            customView = UIView(frame: CGRect(x: (self.view.frame.size.width-kWidth)/2, y: 150, width: kWidth, height: 100))
         }
         else
         {
             print("drüber")
-            customView = UIView(frame: CGRectMake((self.view.frame.size.width-kWidth)/2, heightOfStandardCallout-200, kWidth, 100))
+            customView = UIView(frame: CGRect(x: (self.view.frame.size.width-kWidth)/2, y: heightOfStandardCallout-200, width: kWidth, height: 100))
         }
         
         
-        let customButton = UIButton(type: .Custom)
-        customButton.frame = CGRectMake(280, 0, 20, 20)
-        customButton.setImage(UIImage(named: "x-image.png"), forState: .Normal)
-        customButton.addTarget(self, action: #selector(doAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        let customButton = UIButton(type: .custom)
+        customButton.frame = CGRect(x: 280, y: 0, width: 20, height: 20)
+        customButton.setImage(UIImage(named: "x-image.png"), for: UIControlState())
+        customButton.addTarget(self, action: #selector(doAction(_:)), for: UIControlEvents.touchUpInside)
         
-        let customLabel = UILabel(frame: CGRectMake(5, 5, 295, 95))
+        let customLabel = UILabel(frame: CGRect(x: 5, y: 5, width: 295, height: 95))
         customLabel.numberOfLines = 0
         customLabel.font = UIFont(name: "Verdana", size: 10)
         customLabel.text = "Hier könnten zusätzliche Infos stehen."
@@ -73,7 +74,7 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
         
         customView.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.8)
         customView.layer.borderWidth = 1.5
-        customView.layer.borderColor = UIColor.blackColor().CGColor
+        customView.layer.borderColor = UIColor.black.cgColor
         customView.addSubview(customButton)
         customView.addSubview(customLabel)
         
@@ -81,24 +82,24 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
         return customView
     }
     
-    func doAction(buttonView: UIView)
+    func doAction(_ buttonView: UIView)
     {
         buttonView.superview?.removeFromSuperview()
     }
 
-    func handleTap(gestureRecognizer: UITapGestureRecognizer)
+    func handleTap(_ gestureRecognizer: UITapGestureRecognizer)
     {
         print("You tapped the \(gestureRecognizer.view!.classForCoder)")
-        self.performSegueWithIdentifier("calloutImageSegue", sender: gestureRecognizer)
+        self.performSegue(withIdentifier: "calloutImageSegue", sender: gestureRecognizer)
     }
     
     
     // MARK: - MapView Delegate
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         let identifier = "Report"
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         
         if annotationView == nil
         {
@@ -111,14 +112,14 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
             annotationView?.annotation = annotation
         }
         
-        let btn = UIButton(type: .DetailDisclosure)
+        let btn = UIButton(type: .detailDisclosure)
         annotationView?.rightCalloutAccessoryView = btn
        
-        let annotationImageView = UIImageView(frame: CGRectMake(0, 0, 59, 59))
+        let annotationImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 59, height: 59))
         annotationImageView.image = report.image
         annotationView?.leftCalloutAccessoryView = annotationImageView
         
-        annotationImageView.userInteractionEnabled = true
+        annotationImageView.isUserInteractionEnabled = true
         
         let tgr = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         annotationImageView.addGestureRecognizer(tgr)
@@ -126,26 +127,26 @@ class MapViewViewController: UIViewController, MKMapViewDelegate {
         return annotationView
 }
     
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         //mapView.addSubview(additionalCallout(view.frame.origin.y))
         
-        performSegueWithIdentifier("calloutCommentSegue", sender: view)
+        performSegue(withIdentifier: "calloutCommentSegue", sender: view)
     }
     
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "calloutImageSegue"
         {
-            let divc: DetailImageViewController = segue.destinationViewController as! DetailImageViewController
+            let divc: DetailImageViewController = segue.destination as! DetailImageViewController
             divc.report = report
         }
         
         if segue.identifier == "calloutCommentSegue"
         {
-            let fcvc: FullCommentViewController = segue.destinationViewController as! FullCommentViewController
+            let fcvc: FullCommentViewController = segue.destination as! FullCommentViewController
             fcvc.report = report
             
         }

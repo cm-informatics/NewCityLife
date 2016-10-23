@@ -16,20 +16,24 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         {
         didSet
             {
-                print("Has been set to \(reportDictionary)")
-                //self.tableView.reloadData()
+                //print("Has been set to \(reportDictionary)")
+                self.tableView.reloadData()
             }
         }
-
-    let report = Report(image: UIImage(), category: "", locationData: (0,0), comment: "", timestamp: NSDate())
+    
+    let report = Report()
     
     let locationManager = CLLocationManager()
     
     
     // MARK: - AppLifeCycle
     
-   override func viewWillAppear(animated: Bool) {
+   override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Neuen Report erstellen"
     }
     
     override func viewDidLoad()
@@ -38,17 +42,17 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = true
         
-        let sendButton = UIBarButtonItem(title: "Send", style: .Plain, target: self, action: #selector(ReportsTableViewController.sendAction(_:)))
+        let sendButton = UIBarButtonItem(title: "Send", style: .plain, target: self, action: #selector(ReportsTableViewController.sendAction(_:)))
         self.navigationItem.rightBarButtonItem = sendButton
         
-        let current_date = NSDate()
+        let current_date = Date()
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyy HH:mm:ss"
         
-        reportDictionary["date"] = dateFormatter.stringFromDate(current_date)
+        reportDictionary["date"] = dateFormatter.string(from: current_date) as AnyObject?
         
-        report.timestamp = dateFormatter.dateFromString(reportDictionary["date"] as! String)!
+        report.timestamp = dateFormatter.date(from: reportDictionary["date"] as! String)!
         
         locationManager.delegate = self
         
@@ -57,7 +61,6 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
             locationManager.requestWhenInUseAuthorization()
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.startUpdatingLocation()
-            
         }
         else
         {
@@ -67,27 +70,27 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
     
     // MARK: - Unwind Segues
     
-    @IBAction func backNavigation(sender: UIStoryboardSegue)
+    @IBAction func backNavigation(_ sender: UIStoryboardSegue)
     {
         
         if sender.identifier! == "categoryUnwind"
         {
-            let sourceViewController = sender.sourceViewController as! IssueTableViewController
+            let sourceViewController = sender.source as! IssueTableViewController
         
             let indexPath = sourceViewController.tableView.indexPathForSelectedRow
         
-            let cell = sourceViewController.tableView.cellForRowAtIndexPath(indexPath!)
+            let cell = sourceViewController.tableView.cellForRow(at: indexPath!)
             print(cell?.textLabel?.text)
         
-            reportDictionary["category"] = cell?.textLabel?.text!
+            reportDictionary["category"] = cell?.textLabel?.text! as AnyObject?
         }
         
         if sender.identifier! == "commentUnwind"
         {
-            let sourceViewController = sender.sourceViewController as! CommentViewController
+            let sourceViewController = sender.source as! CommentViewController
             print(sourceViewController.commentTextView.text!)
             
-            reportDictionary["comment"] = sourceViewController.commentTextView.text!
+            reportDictionary["comment"] = sourceViewController.commentTextView.text! as AnyObject?
         }
 
     }
@@ -95,22 +98,22 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    override func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return 4
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        if indexPath.row == 0
+        if (indexPath as NSIndexPath).row == 0
         {
-            let imageCell = tableView.dequeueReusableCellWithIdentifier("imageCell", forIndexPath: indexPath) as! ImageTableViewCell
+            let imageCell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ImageTableViewCell
 
             imageCell.imageCellLabel!.text = "Bild"
             
@@ -122,12 +125,12 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
             return imageCell
         }
             
-        else if indexPath.row == 1
+        else if (indexPath as NSIndexPath).row == 1
         {
-            let categoryCell = tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath)
+            let categoryCell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
             
             categoryCell.textLabel?.text = "Kategorie"
-            categoryCell.accessoryType = .DisclosureIndicator
+            categoryCell.accessoryType = .disclosureIndicator
             
             if let category = reportDictionary["category"]
             {
@@ -140,42 +143,27 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
             
             return categoryCell
         }
-        else if indexPath.row == 2
+        else if (indexPath as NSIndexPath).row == 2
         {
-            let locationCell = tableView.dequeueReusableCellWithIdentifier("locationCell", forIndexPath: indexPath)
+            let locationCell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath)
             
             locationCell.textLabel?.text = "Location"
-            if let location = reportDictionary["location"]
+            if let location = reportDictionary["location"] as? (längengrad: Double, breitengrad: Double)
             {
-                
-                locationCell.detailTextLabel?.textColor = UIColor.grayColor()
-                //locationCell.detailTextLabel?.text = location as? String
-               
-                if (location[0] != nil)
-                {
-                    locationCell.detailTextLabel?.text = "\(location[0]), \(location[1])"
-                }
-                else
-                {
-                    locationCell.detailTextLabel?.text = "Ortsbestimmung nicht möglich"
-                }
-                
+                locationCell.detailTextLabel?.text = "\(location.längengrad) , \(location.breitengrad)"
             }
             else
             {
-                locationCell.detailTextLabel?.textColor = UIColor.redColor()
                 locationCell.detailTextLabel?.text = "Ortsbestimmung nicht möglich"
-
             }
-                        
             return locationCell
         }
         else
         {
-            let commentCell = tableView.dequeueReusableCellWithIdentifier("descriptionCell", forIndexPath: indexPath)
+            let commentCell = tableView.dequeueReusableCell(withIdentifier: "descriptionCell", for: indexPath)
             
             commentCell.textLabel?.text = "Beschreibung"
-            commentCell.accessoryType = .DisclosureIndicator
+            commentCell.accessoryType = .disclosureIndicator
             
             if let comment = reportDictionary["comment"]
             {
@@ -191,8 +179,8 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath as NSIndexPath).row == 0
         {
             return 110
         }
@@ -202,37 +190,35 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
     
     // MARK: - CLLocationManager Delegate
     
-    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        print("Latitude: \(newLocation.coordinate.latitude)")
-        print("Longitude: \(newLocation.coordinate.longitude)")
-        
-        
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
         manager.stopUpdatingLocation()
-
-        report.locationData.längengrad = newLocation.coordinate.longitude
-        report.locationData.breitengrad = newLocation.coordinate.latitude
+        print("Location is: \(locations[0].coordinate.latitude)")
+        print("Location is: \(locations[0].coordinate.longitude)")
         
-        let locationArray = [newLocation.coordinate.longitude, newLocation.coordinate.latitude]
+        if let currentLocation = locations.first?.coordinate
+        {
+            report.locationData.längengrad = currentLocation.longitude
+            report.locationData.breitengrad = currentLocation.latitude
+        }
         
-        reportDictionary["location"] = locationArray
+        reportDictionary["location"] = (report.locationData) as AnyObject?
         
-        print("The Location is: \((reportDictionary["location"])!)")
         self.tableView.reloadData()
-        
     }
-
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         manager.stopUpdatingLocation()
         print("\(error)")
         
-        reportDictionary["location"] = "Ortsbestimmung nicht möglich"
+        //reportDictionary["location"] = "LOcation Service failed" as AnyObject?
+        reportDictionary["location"] = nil
     }
-    
     
     
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
@@ -240,11 +226,11 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         if segue.identifier == "commentSegue"
         {
             let indexPath = self.tableView.indexPathForSelectedRow
-            let cell = self.tableView(self.tableView, cellForRowAtIndexPath: indexPath!)
+            let cell = self.tableView(self.tableView, cellForRowAt: indexPath!)
             
             if cell.detailTextLabel?.text != "wählen"
             {
-                let navigationController: UINavigationController = segue.destinationViewController as! UINavigationController
+                let navigationController: UINavigationController = segue.destination as! UINavigationController
                 
                 if let cvc: CommentViewController = navigationController.visibleViewController as? CommentViewController
                 {
@@ -260,38 +246,40 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
     }
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == 0
+    //Um die Kamerafunktion nutzen zu können müssen spezielle Eintragungen in der plist stehen
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).row == 0
         {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             
-            if UIImagePickerController.isSourceTypeAvailable(.Camera)
+            if UIImagePickerController.isSourceTypeAvailable(.camera)
             {
-                imagePicker.sourceType = .Camera
+                imagePicker.sourceType = .camera
+                
             }
             else
             {
-                print("No Media available")
+                imagePicker.sourceType = .photoLibrary
             }
             
-            presentViewController(imagePicker, animated: true, completion: nil)
+            present(imagePicker, animated: true, completion: nil)
         }
     }
 
     // MARK: - UIImagePickerDelegates
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
     {
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         reportDictionary["image"] = selectedImage
         
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - UIBarButton Actions
     
-    func sendAction(sender: AnyObject)
+    func sendAction(_ sender: AnyObject)
     {
         print(reportDictionary.count)
         
@@ -302,26 +290,29 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
             
             report.image = reportDictionary["image"] as! UIImage
             
-            let imageData = NSData(data: UIImageJPEGRepresentation(report.image, 0.2)!)
-            reportDictionary["image"] = imageData
+            let imageData = NSData(data: UIImageJPEGRepresentation(report.image, 0.2)!) as Data
+            reportDictionary["image"] = imageData as AnyObject?
             
+            //Die LocationData müssen hier noch einmal ein einen Array umgewandelt werden,
+            //da ich diese sonst nicht in eine PList schreiben kann.
             
-            print("Der Report: \(report)")
+            let locationArray = [report.locationData.längengrad, report.locationData.breitengrad]
+            reportDictionary["location"] = locationArray as AnyObject?
+            
             
             //Ab hier liegt der report komplett vor
             
-            let fileManager = NSFileManager()
-            var pListPath: NSURL
+            let fileManager = FileManager()
+            var pListPath: URL
             
-            let rootPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first
-            //let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+            let rootPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
             
             if let documentDir = rootPath
             {
-                let reportsPath = NSURL(fileURLWithPath: documentDir, isDirectory: true).URLByAppendingPathComponent("Reports")
+                let reportsPath = URL(fileURLWithPath: documentDir, isDirectory: true).appendingPathComponent("Reports")
                 
                 
-                if fileManager.fileExistsAtPath(reportsPath.path!)
+                if fileManager.fileExists(atPath: reportsPath.path)
                 {
                     print("Verzeichnis existiert bereits: \(reportsPath)")
                 }
@@ -329,7 +320,7 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
                 {
                     do
                     {
-                        try fileManager.createDirectoryAtURL(reportsPath, withIntermediateDirectories: false, attributes: nil)
+                        try fileManager.createDirectory(at: reportsPath, withIntermediateDirectories: false, attributes: nil)
                         print("Verzeichniss wurde erfolgreich erstellt - Dir Path: \(reportsPath)")
                     }
                     catch
@@ -342,11 +333,11 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
                 
                 // Das Verzeichniss existiert jetzt, also wird jetzt die myReports.plist -Datei angelegt.
                 
-                pListPath = reportsPath.URLByAppendingPathComponent("myReports.plist", isDirectory: false)
+                pListPath = reportsPath.appendingPathComponent("myReports.plist", isDirectory: false)
                 
                 var isDir: ObjCBool = false
                 
-                if fileManager.fileExistsAtPath(pListPath.path!, isDirectory: &isDir)
+                if fileManager.fileExists(atPath: pListPath.path, isDirectory: &isDir)
                     {
                         print("File already exits")
                     }
@@ -354,37 +345,36 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
                     {
                         //let success = fileManager.createFileAtPath(pListPath.path!, contents: data, attributes: nil)
                         let dictionary = NSDictionary()
-                        let success = dictionary.writeToURL(pListPath, atomically: true)
+                        let success = dictionary.write(to: pListPath, atomically: true)
                         
                         print("Was file created?: \(success)")
                     }
                 
                 //Generierung einer ID aus Datum und einer zufälligen Zahl bis maximal 9999 (10000-1)
-                let current_date = NSDate()
-                let dateFormatter = NSDateFormatter()
+                let current_date = Date()
+                let dateFormatter = DateFormatter()
                 
                 dateFormatter.dateFormat = "ddMMyyyyHHmmss"
                 
-                let UID = dateFormatter.stringFromDate(current_date) + "\(Int(arc4random_uniform(10000)))"
+                let UID = dateFormatter.string(from: current_date) + "\(Int(arc4random_uniform(10000)))"
                 
-                if var completeReport = NSMutableDictionary(contentsOfURL: pListPath)
+                if var completeReport = NSMutableDictionary(contentsOf: pListPath)
                 {
-                    completeReport = NSMutableDictionary(dictionary: NSMutableDictionary(contentsOfURL: pListPath)!)
+                    completeReport = NSMutableDictionary(dictionary: NSMutableDictionary(contentsOf: pListPath)!)
                     
-                    completeReport.setObject(reportDictionary, forKey: "Report Nr. \(UID)")
+                    completeReport.setObject(reportDictionary, forKey: "Report Nr. \(UID)" as NSCopying)
                     
-                    if completeReport.writeToURL(pListPath, atomically: true)
+                    if completeReport.write(to: pListPath, atomically: true)
                     {
                         print("Writing was successful")
                         
-                        let successAlert = UIAlertController(title: "Report Nr. \(UID)", message: "Daten erfolgreich gespeichert", preferredStyle: .Alert)
+                        let successAlert = UIAlertController(title: "Report Nr. \(UID)", message: "Daten erfolgreich gespeichert", preferredStyle: .alert)
                         
-                        successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler:{(action: UIAlertAction!) -> Void in
-                            print("OK was pressed")
-                            self.navigationController?.popToRootViewControllerAnimated(true)
+                        successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:{(action: UIAlertAction!) -> Void in
+                            _ = self.navigationController?.popToRootViewController(animated: true)
                         }))
                         
-                        self.presentViewController(successAlert, animated: true, completion: nil)
+                        self.present(successAlert, animated: true, completion: nil)
                     }
                     else
                     {
@@ -401,7 +391,13 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         }
         else
         {
-            print("Da fehlt noch was: \(reportDictionary.enumerate())")
+            print("Da fehlt noch was: \(reportDictionary.enumerated())")
+            
+            let alertView = UIAlertController(title: "Error", message: "Fehlende Angaben. Sie haben nicht alle Felder ausgefüllt.", preferredStyle: .alert)
+            
+            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertView.addAction(action)
+            self.present(alertView, animated: true, completion: nil)
         }
     }
 }

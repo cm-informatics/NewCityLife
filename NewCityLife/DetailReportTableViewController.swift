@@ -36,79 +36,79 @@ class DetailReportTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return keyArray.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         
-        if indexPath.row == 0
+        if (indexPath as NSIndexPath).row == 0
         {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath)
-            cell.textLabel?.text = keyArray.objectAtIndex(indexPath.row) as? String
+            let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
+            cell.textLabel?.text = keyArray.object(at: (indexPath as NSIndexPath).row) as? String
 
             cell.detailTextLabel?.text = "\(report.category)"
             return cell
         }
         
-        else if indexPath.row == 1
+        else if (indexPath as NSIndexPath).row == 1
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("dateCell", forIndexPath: indexPath)
-            cell.textLabel?.text = keyArray.objectAtIndex(indexPath.row) as? String
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell", for: indexPath)
+            cell.textLabel?.text = keyArray.object(at: (indexPath as NSIndexPath).row) as? String
 
             cell.detailTextLabel?.text = "\(report.timestamp)"
             return cell
         }
         
-        else if indexPath.row == 2
+        else if (indexPath as NSIndexPath).row == 2
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("locationCell", forIndexPath: indexPath)
-            cell.textLabel?.text = keyArray.objectAtIndex(indexPath.row) as? String
+            let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath)
+            cell.textLabel?.text = keyArray.object(at: (indexPath as NSIndexPath).row) as? String
 
             cell.detailTextLabel?.text = "\(report.locationData.längengrad), \(report.locationData.breitengrad)"
-            cell.accessoryType = .DisclosureIndicator
+            cell.accessoryType = .disclosureIndicator
             return cell
         }
 
-        else if indexPath.row == 3
+        else if (indexPath as NSIndexPath).row == 3
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("commentCell", forIndexPath: indexPath)
-            cell.textLabel?.text = keyArray.objectAtIndex(indexPath.row) as? String
+            let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
+            cell.textLabel?.text = keyArray.object(at: (indexPath as NSIndexPath).row) as? String
 
             cell.detailTextLabel?.text = "\(report.comment)"
-            cell.accessoryType = .DisclosureIndicator
+            cell.accessoryType = .disclosureIndicator
             return cell
         }
 
-       else if indexPath.row == 4
+       else if (indexPath as NSIndexPath).row == 4
         {
-            let imageCell = tableView.dequeueReusableCellWithIdentifier("imageCell", forIndexPath: indexPath) as! ImageTableViewCell
+            let imageCell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ImageTableViewCell
             
-            imageCell.imageCellLabel?.text = keyArray.objectAtIndex(indexPath.row) as? String
+            imageCell.imageCellLabel?.text = keyArray.object(at: (indexPath as NSIndexPath).row) as? String
             imageCell.imageCellImageView.image = report.image
-            imageCell.accessoryType = .DisclosureIndicator
+            imageCell.accessoryType = .disclosureIndicator
             
             return imageCell
 
         }
         else
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath)
             return cell
         }
        
         
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 4
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath as NSIndexPath).row == 4
         {
             return 110
         }
@@ -155,21 +155,21 @@ class DetailReportTableViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "fullImageSegue"
         {
-            let divc: DetailImageViewController = segue.destinationViewController as! DetailImageViewController
+            let divc: DetailImageViewController = segue.destination as! DetailImageViewController
             divc.report = report
         }
         if segue.identifier == "commentSegue"
         {
-            let fcvc:FullCommentViewController = segue.destinationViewController as! FullCommentViewController
+            let fcvc:FullCommentViewController = segue.destination as! FullCommentViewController
             fcvc.report = report
         }
         if segue.identifier == "locationSegue"
         {
-            let mvv:MapViewViewController = segue.destinationViewController as! MapViewViewController
+            let mvv:MapViewViewController = segue.destination as! MapViewViewController
             mvv.report = report
             
         }

@@ -20,7 +20,7 @@ class FullCommentViewController: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         
         commentTextView.layer.borderWidth = 0.5
-        commentTextView.layer.borderColor = UIColor.init(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).CGColor
+        commentTextView.layer.borderColor = UIColor.init(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).cgColor
         commentTextView.layer.cornerRadius = 6.0
         
         commentTextView.text = report.comment

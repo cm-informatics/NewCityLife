@@ -14,9 +14,9 @@ class Report
     var category: String
     var locationData = (längengrad: 0.0, breitengrad: 0.0)
     var comment: String
-    var timestamp: NSDate
+    var timestamp: Date
     
-    init(image:UIImage, category:String, locationData:(längengrad: Double, breitengrad:Double), comment:String, timestamp: NSDate)
+    init(image:UIImage, category:String, locationData:(längengrad: Double, breitengrad:Double), comment:String, timestamp: Date)
     {
         self.image = image
         self.category = category
@@ -30,7 +30,7 @@ class Report
         self.image = UIImage()
         self.category = ""
         self.comment = ""
-        self.timestamp = NSDate()
+        self.timestamp = Date()
         self.locationData = (längengrad: 0.0, breitengrad: 0.0)
     }
 
