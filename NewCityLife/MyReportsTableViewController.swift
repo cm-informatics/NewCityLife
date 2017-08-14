@@ -24,7 +24,7 @@ class MyReportsTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         self.navigationItem.title = "My Reports"
-        self.navigationController?.navigationBar.tintColor = UIColor.blue
+        //self.navigationController?.navigationBar.tintColor = UIColor.blue
         
         let fileManager = FileManager()
         

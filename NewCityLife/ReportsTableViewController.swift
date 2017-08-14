@@ -42,6 +42,13 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = true
         
+        //print(navigationItem.titleView?.tintColor as Any)
+        //navigationItem.titleView?.tintColor = UIColor.red
+        //navigationItem.titleView?.backgroundColor = UIColor.black
+        
+        //print(self.navigationController?.navigationItem.title as Any)
+        print(navigationItem)
+        
         let sendButton = UIBarButtonItem(title: "Send", style: .plain, target: self, action: #selector(ReportsTableViewController.sendAction(_:)))
         self.navigationItem.rightBarButtonItem = sendButton
         
@@ -76,11 +83,8 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
         if sender.identifier! == "categoryUnwind"
         {
             let sourceViewController = sender.source as! IssueTableViewController
-        
             let indexPath = sourceViewController.tableView.indexPathForSelectedRow
-        
             let cell = sourceViewController.tableView.cellForRow(at: indexPath!)
-            print(cell?.textLabel?.text)
         
             reportDictionary["category"] = cell?.textLabel?.text! as AnyObject?
         }
@@ -292,6 +296,11 @@ class ReportsTableViewController: UITableViewController, CLLocationManagerDelega
             
             let imageData = NSData(data: UIImageJPEGRepresentation(report.image, 0.2)!) as Data
             reportDictionary["image"] = imageData as AnyObject?
+            
+            //Längen- und Breitengrad auf 9 Stellen nach dem Komma runden
+            
+            report.locationData.breitengrad = Double(round(report.locationData.breitengrad*1000000000)/1000000000)
+            report.locationData.längengrad = Double(round(report.locationData.längengrad*1000000000)/1000000000)
             
             //Die LocationData müssen hier noch einmal ein einen Array umgewandelt werden,
             //da ich diese sonst nicht in eine PList schreiben kann.

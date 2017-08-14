@@ -63,7 +63,11 @@ class DetailReportTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell", for: indexPath)
             cell.textLabel?.text = keyArray.object(at: (indexPath as NSIndexPath).row) as? String
 
-            cell.detailTextLabel?.text = "\(report.timestamp)"
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy HH:mm:ss"
+            dateFormatter.timeZone = TimeZone.current
+            
+            cell.detailTextLabel?.text = dateFormatter.string(from: report.timestamp)
             return cell
         }
         
